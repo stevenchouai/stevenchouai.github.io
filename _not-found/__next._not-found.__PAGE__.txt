@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[5466,["466","static/chunks/466-5baaf91b460ef462.js","191","static/chunks/191-d3f866f28539561a.js","974","static/chunks/app/page-3fe1b135fc64b620.js"],""]
+3:I[3818,[],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"buildId":"-yyaRvOKlWLGJEX9fI87M","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"min-h-[60vh] flex items-center","children":["$","div",null,{"className":"container ","children":["$","div",null,{"className":"max-w-lg","children":[["$","p",null,{"className":"text-sm font-semibold text-[var(--accent)] mb-4","children":"404"}],["$","h1",null,{"className":"text-4xl sm:text-5xl font-bold tracking-tight mb-4","children":"Page not found"}],["$","p",null,{"className":"text-base text-[var(--muted)] mb-8 leading-relaxed","children":"The page you're looking for doesn't exist, was moved, or was unpublished by the digital twin during a content audit."}],["$","div",null,{"className":"flex gap-4","children":[["$","$L2",null,{"href":"/","className":"btn btn-primary text-sm","children":"Go home"}],["$","$L2",null,{"href":"/blog","className":"btn btn-ghost text-sm","children":"Read the blog"}]]}]]}]}]}],null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null

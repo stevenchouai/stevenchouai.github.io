@@ -1,0 +1,22 @@
+# Steven Chou
+
+> Public proof chain for Steven Chou: AI-native quality systems, reverse engineering, digital twin workflows, and software engineering artifacts.
+
+## Start here
+
+- Site: https://stevenchouai.github.io/
+- Proof chain: https://stevenchouai.github.io/proof-chain
+- Digital Twin: https://stevenchouai.github.io/digital-twin
+- Experience: https://stevenchouai.github.io/experience
+- Blog: https://stevenchouai.github.io/blog
+
+## High-signal technical artifacts
+
+- Claude Code source deep dive: https://stevenchouai.github.io/blog/claude-code-source-deep-dive
+- AI reshapes engineering SDLC: https://stevenchouai.github.io/blog/ai-reshapes-engineering-sdlc
+- CLIProxyAPI: https://github.com/stevenchouai/CLIProxyAPI
+- personalWebsite repository: https://github.com/stevenchouai/personalWebsite
+
+## How to read this site
+
+Use `/proof-chain` as the claim-to-artifact index, `/experience` for career context, and `/blog` for long-form reasoning. The site is maintained as a public engineering narrative system rather than a generic portfolio template.
