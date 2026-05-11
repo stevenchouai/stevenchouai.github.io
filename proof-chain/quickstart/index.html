@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>60-second agent proof quickstart</title>
+  <meta name="description" content="A one-minute public quickstart for inspecting Steven Chou's AI-agent proof chain without installing anything.">
+  <meta name="application-name" content="Steven Chou - AI Product Engineer">
+  <link rel="canonical" href="https://stevenchouai.github.io/proof-chain/quickstart/">
+  <link rel="stylesheet" href="/_next/static/css/fe609adb6858aaed.css">
+  <link rel="icon" href="/favicon.ico?603d046c9a6fdfbb" type="image/x-icon" sizes="16x16">
+  <style>
+    :root {
+      color-scheme: light;
+      --quick-bg: #f5f7fb;
+      --quick-ink: #171717;
+      --quick-muted: #5f6468;
+      --quick-soft: #ffffff;
+      --quick-line: #d8dee8;
+      --quick-accent: #0f766e;
+      --quick-accent-2: #b45309;
+      --quick-shadow: 0 16px 40px rgba(23, 23, 23, 0.07);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 118, 110, 0.09), transparent 260px),
+        var(--quick-bg);
+      color: var(--quick-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(15, 118, 110, 0.35);
+      outline-offset: 3px;
+    }
+
+    .quick-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-160%);
+      border-radius: 999px;
+      background: var(--quick-ink);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .quick-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      color: var(--quick-muted);
+      font-size: 14px;
+    }
+
+    .quick-nav a {
+      text-decoration: none;
+    }
+
+    .quick-nav strong {
+      color: var(--quick-ink);
+      font-size: 16px;
+    }
+
+    .quick-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      padding: 54px 0 28px;
+      max-width: 840px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--quick-accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: var(--quick-muted);
+      font-size: 19px;
+      line-height: 1.75;
+    }
+
+    .route-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--quick-muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--quick-line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .step-card {
+      min-height: 100%;
+      border: 1px solid var(--quick-line);
+      border-radius: 8px;
+      background: var(--quick-soft);
+      box-shadow: var(--quick-shadow);
+      padding: 22px;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #102a27;
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .step-card h2 {
+      margin: 16px 0 12px;
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .field {
+      margin-top: 16px;
+    }
+
+    .field-label {
+      margin: 0 0 4px;
+      color: var(--quick-accent-2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .field p {
+      margin: 0;
+      color: var(--quick-muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .field a {
+      color: var(--quick-ink);
+      font-weight: 700;
+    }
+
+    .expected-time {
+      display: inline-flex;
+      margin-top: 4px;
+      border: 1px solid rgba(15, 118, 110, 0.28);
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.08);
+      padding: 3px 9px;
+      color: #0f5f5a;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .note,
+    .checklist {
+      margin-top: 26px;
+      border-top: 1px solid var(--quick-line);
+      padding-top: 26px;
+    }
+
+    .note {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 24px;
+      color: var(--quick-muted);
+    }
+
+    .note h2,
+    .checklist h2 {
+      margin: 0;
+      color: var(--quick-ink);
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .note p {
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .checklist ol {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: quick-check;
+    }
+
+    .checklist li {
+      counter-increment: quick-check;
+      min-height: 112px;
+      border: 1px solid var(--quick-line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 14px;
+      color: var(--quick-muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .checklist li::before {
+      content: counter(quick-check);
+      display: block;
+      margin-bottom: 8px;
+      color: var(--quick-accent);
+      font-weight: 900;
+    }
+
+    footer {
+      margin-top: 46px;
+      border-top: 1px solid var(--quick-line);
+      padding: 24px 0 34px;
+      color: var(--quick-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .steps,
+      .checklist ol {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .note {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .quick-shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .quick-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .steps,
+      .checklist ol {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="quick-shell">
+    <header class="quick-nav">
+      <a href="/"><strong>Steven Chou</strong></a>
+      <nav class="quick-nav-links" aria-label="Quickstart navigation">
+        <a href="/proof-chain/">Proof chain</a>
+        <a href="/demo/">Demo</a>
+        <a href="/digital-twin/">Digital Twin</a>
+        <a href="https://github.com/stevenchouai" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Public proof chain</p>
+        <h1 id="page-title">60-second agent proof quickstart</h1>
+        <p class="lede">Use this page when a visitor asks, "What has Steven actually built with AI agents?" It is a four-stop path through public pages and public GitHub surfaces, with no install required.</p>
+        <div class="route-row" aria-label="Route summary">
+          <span class="pill">4 steps</span>
+          <span class="pill">Public evidence only</span>
+          <span class="pill">No local setup</span>
+        </div>
+      </section>
+
+      <section class="steps" aria-label="Four quickstart steps">
+        <article class="step-card">
+          <span class="step-number">01</span>
+          <h2>See the public website and profile</h2>
+          <div class="field">
+            <p class="field-label">What to click</p>
+            <p>Open the <a href="https://stevenchouai.github.io/">public website</a>, then open Steven's <a href="https://github.com/stevenchouai" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">What it proves</p>
+            <p>There is a live public proof surface: website routes, writing, project pages, and a matching GitHub identity that a visitor can inspect without an account.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Expected time</p>
+            <p><span class="expected-time">10 seconds</span></p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">02</span>
+          <h2>Inspect the Digital Twin demos</h2>
+          <div class="field">
+            <p class="field-label">What to click</p>
+            <p>Open the <a href="/digital-twin/">Digital Twin page</a>, then inspect the <a href="https://github.com/stevenchouai/digital-twin" target="_blank" rel="noopener noreferrer">Digital Twin repo</a>.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">What it proves</p>
+            <p>The agent workflow is packaged as public diagrams, an explainer page, and a repo. The claim is simple: useful AI work should leave durable files behind.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Expected time</p>
+            <p><span class="expected-time">15 seconds</span></p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">03</span>
+          <h2>Run or inspect Agent Scorecard</h2>
+          <div class="field">
+            <p class="field-label">What to click</p>
+            <p>Open the <a href="https://github.com/stevenchouai/agent-scorecard" target="_blank" rel="noopener noreferrer">Agent Scorecard repo</a> and inspect the README, examples, and reports.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">What it proves</p>
+            <p>Agent trust is judged by evidence: inputs, tool use, artifacts, checks, and output quality. A local run can wait; the public repo shows the scoring idea.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Expected time</p>
+            <p><span class="expected-time">20 seconds</span></p>
+          </div>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">04</span>
+          <h2>Inspect the Knowledge Harness demo</h2>
+          <div class="field">
+            <p class="field-label">What to click</p>
+            <p>Open the <a href="/demo/">Demo page</a>, find the Knowledge Harness card, then inspect the <a href="https://github.com/stevenchouai/knowledge-harness" target="_blank" rel="noopener noreferrer">Knowledge Harness repo</a>.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">What it proves</p>
+            <p>This shows the public demo CLI, fake-vault receipts, and tests. It does not claim that Steven's private notes, raw runs, or local runtime are public evidence.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Expected time</p>
+            <p><span class="expected-time">15 seconds</span></p>
+          </div>
+        </article>
+      </section>
+
+      <section class="note" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">No private data here</h2>
+        <p>This quickstart links only to public pages and public GitHub surfaces. It does not include private notes, internal tickets, raw session transcripts, credentials, or unpublished run data.</p>
+      </section>
+
+      <section class="checklist" aria-labelledby="minute-title">
+        <h2 id="minute-title">If you only have one minute</h2>
+        <ol>
+          <li>Confirm the website and GitHub profile are public and match the same person.</li>
+          <li>Open Digital Twin and look for the retrieve, execute, write-back loop.</li>
+          <li>Open Agent Scorecard and find the example-based evaluation pattern.</li>
+          <li>Open the Demo page and inspect the Knowledge Harness card as a public demo surface.</li>
+          <li>Stop at public evidence; do not infer anything from private systems.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Steven Chou</span>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+60-second agent proof quickstart
+
+Use this page when a visitor asks, "What has Steven actually built with AI agents?"
+It is a four-stop path through public pages and public GitHub surfaces, with no
+install required.
+
+1. See the public website and profile
+What to click:
+- https://stevenchouai.github.io/
+- https://github.com/stevenchouai
+
+What it proves:
+There is a live public proof surface: website routes, writing, project pages, and
+a matching GitHub identity that a visitor can inspect without an account.
+
+Expected time: 10 seconds
+
+2. Inspect the Digital Twin demos
+What to click:
+- https://stevenchouai.github.io/digital-twin/
+- https://github.com/stevenchouai/digital-twin
+
+What it proves:
+The agent workflow is packaged as public diagrams, an explainer page, and a repo.
+The claim is simple: useful AI work should leave durable files behind.
+
+Expected time: 15 seconds
+
+3. Run or inspect Agent Scorecard
+What to click:
+- https://github.com/stevenchouai/agent-scorecard
+
+What it proves:
+Agent trust is judged by evidence: inputs, tool use, artifacts, checks, and
+output quality. A local run can wait; the public repo shows the scoring idea.
+
+Expected time: 20 seconds
+
+4. Inspect the Knowledge Harness demo
+What to click:
+- https://stevenchouai.github.io/demo/
+- https://github.com/stevenchouai/knowledge-harness
+
+What it proves:
+This shows the public demo CLI, fake-vault receipts, and tests. It does not
+claim that Steven's private notes, raw runs, or local runtime are public evidence.
+
+Expected time: 15 seconds
+
+No private data here
+
+This quickstart links only to public pages and public GitHub surfaces. It does
+not include private notes, internal tickets, raw session transcripts,
+credentials, or unpublished run data.
+
+If you only have one minute
+
+- Confirm the website and GitHub profile are public and match the same person.
+- Open Digital Twin and look for the retrieve, execute, write-back loop.
+- Open Agent Scorecard and find the example-based evaluation pattern.
+- Open the Demo page and inspect the Knowledge Harness card as a public demo surface.
+- Stop at public evidence; do not infer anything from private systems.
