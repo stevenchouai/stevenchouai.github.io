@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>Agent ROI Calculator</title>
+  <meta name="description" content="A public-safe 60-second calculator for deciding whether an AI agent task is worth repeating, needs review, or should not be delegated yet.">
+  <meta name="application-name" content="Steven Chou - AI Product Engineer">
+  <link rel="canonical" href="https://stevenchouai.github.io/proof-chain/roi-calculator/">
+  <link rel="stylesheet" href="/_next/static/css/fe609adb6858aaed.css">
+  <link rel="icon" href="/favicon.ico?603d046c9a6fdfbb" type="image/x-icon" sizes="16x16">
+  <style>
+    :root {
+      color-scheme: light;
+      --roi-bg: #f6f3eb;
+      --roi-ink: #181818;
+      --roi-muted: #5d6265;
+      --roi-soft: #fffdf8;
+      --roi-line: #d9d0c2;
+      --roi-green: #0e6b5d;
+      --roi-blue: #223a5e;
+      --roi-rust: #985f16;
+      --roi-red: #9f2f24;
+      --roi-shadow: 0 16px 42px rgba(24, 24, 24, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(14, 107, 93, 0.12), transparent 310px),
+        linear-gradient(135deg, rgba(34, 58, 94, 0.08), transparent 420px),
+        var(--roi-bg);
+      color: var(--roi-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid rgba(14, 107, 93, 0.35);
+      outline-offset: 3px;
+    }
+
+    .roi-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-160%);
+      border-radius: 999px;
+      background: var(--roi-ink);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .roi-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      color: var(--roi-muted);
+      font-size: 14px;
+    }
+
+    .roi-nav a {
+      text-decoration: none;
+    }
+
+    .roi-nav strong {
+      color: var(--roi-ink);
+      font-size: 16px;
+    }
+
+    .roi-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 34px;
+      align-items: end;
+      padding: 50px 0 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--roi-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(38px, 6vw, 74px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: var(--roi-muted);
+      font-size: 19px;
+      line-height: 1.72;
+    }
+
+    .hero-note {
+      border: 1px solid var(--roi-line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.82);
+      box-shadow: var(--roi-shadow);
+      padding: 20px;
+    }
+
+    .hero-note h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .hero-note p {
+      margin: 10px 0 0;
+      color: var(--roi-muted);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .rule-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .rule-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--roi-line);
+      border-radius: 999px;
+      background: white;
+      padding: 6px 10px;
+      color: var(--roi-muted);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      gap: 18px;
+      align-items: start;
+      margin-top: 18px;
+    }
+
+    .input-panel,
+    .result-panel,
+    .note-panel,
+    .explain-panel {
+      border: 1px solid var(--roi-line);
+      border-radius: 8px;
+      background: var(--roi-soft);
+      box-shadow: var(--roi-shadow);
+      padding: 24px;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-heading h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .panel-heading p {
+      margin: 7px 0 0;
+      color: var(--roi-muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    .sample-badge {
+      flex: 0 0 auto;
+      border: 1px solid rgba(152, 95, 22, 0.35);
+      border-radius: 999px;
+      background: rgba(152, 95, 22, 0.08);
+      padding: 5px 9px;
+      color: var(--roi-rust);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .control-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .control-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 112px;
+      gap: 14px;
+      align-items: end;
+      border-top: 1px solid rgba(217, 208, 194, 0.78);
+      padding-top: 18px;
+    }
+
+    .control-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    label {
+      display: block;
+      color: var(--roi-blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .hint {
+      margin: 4px 0 10px;
+      color: var(--roi-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--roi-green);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--roi-line);
+      border-radius: 8px;
+      background: white;
+      color: var(--roi-ink);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 8px 10px;
+    }
+
+    .unit-label {
+      margin-top: 4px;
+      color: var(--roi-muted);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .verdict {
+      border-left: 5px solid var(--roi-green);
+      padding-left: 17px;
+    }
+
+    .verdict.review {
+      border-left-color: var(--roi-rust);
+    }
+
+    .verdict.stop {
+      border-left-color: var(--roi-red);
+    }
+
+    .verdict-label {
+      margin: 0;
+      color: var(--roi-muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .verdict h2 {
+      margin: 4px 0 0;
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .verdict p {
+      margin: 12px 0 0;
+      color: var(--roi-muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .metric {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: baseline;
+      border-top: 1px solid rgba(217, 208, 194, 0.78);
+      padding-top: 12px;
+    }
+
+    .metric:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .metric span {
+      color: var(--roi-muted);
+      font-size: 14px;
+    }
+
+    .metric strong {
+      color: var(--roi-ink);
+      font-size: clamp(22px, 3vw, 32px);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .plain-result {
+      margin-top: 22px;
+      border: 1px solid rgba(14, 107, 93, 0.22);
+      border-radius: 8px;
+      background: rgba(14, 107, 93, 0.07);
+      padding: 14px;
+      color: #16443d;
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .note-panel,
+    .explain-panel {
+      margin-top: 18px;
+    }
+
+    .note-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 170px;
+      resize: vertical;
+      border: 1px solid var(--roi-line);
+      border-radius: 8px;
+      background: white;
+      color: var(--roi-ink);
+      font: inherit;
+      font-size: 15px;
+      line-height: 1.58;
+      padding: 14px;
+    }
+
+    button {
+      min-height: 42px;
+      border: 1px solid #123f38;
+      border-radius: 999px;
+      background: #123f38;
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 8px 14px;
+    }
+
+    button:hover {
+      background: #0e332d;
+    }
+
+    .copy-status {
+      color: var(--roi-muted);
+      font-size: 14px;
+    }
+
+    .explain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .explain-item {
+      border-left: 3px solid rgba(14, 107, 93, 0.45);
+      padding-left: 12px;
+    }
+
+    .explain-item h3 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .explain-item p {
+      margin: 7px 0 0;
+      color: var(--roi-muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    footer {
+      margin-top: 46px;
+      border-top: 1px solid var(--roi-line);
+      padding: 24px 0 34px;
+      color: var(--roi-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .calculator {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .explain-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .roi-shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .roi-nav,
+      .panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .control-row,
+      .metric {
+        grid-template-columns: 1fr;
+      }
+
+      .unit-label {
+        text-align: left;
+      }
+
+      .input-panel,
+      .result-panel,
+      .note-panel,
+      .explain-panel,
+      .hero-note {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="roi-shell">
+    <header class="roi-nav">
+      <a href="/"><strong>Steven Chou</strong></a>
+      <nav class="roi-nav-links" aria-label="ROI calculator navigation">
+        <a href="/proof-chain/">Proof chain</a>
+        <a href="/proof-chain/decision-map/">Decision map</a>
+        <a href="/proof-chain/quickstart/">Quickstart</a>
+        <a href="/proof-chain/audit/">Audit</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Agent ROI sanity check</p>
+          <h1 id="page-title">Should an agent keep this task, or should you stop delegating it?</h1>
+          <p class="lede">Use public example numbers to make the decision concrete. If the agent path saves time, leaves enough value after review, and the downside is small enough, keep using it. If review eats the gain or risk swamps the value, stop for now.</p>
+        </div>
+        <aside class="hero-note" aria-label="Calculator assumptions">
+          <h2>What this checks</h2>
+          <p>Task value means the dollar value of a correct result. Risk penalty means the expected cost of being wrong, late, or needing cleanup.</p>
+          <div class="rule-strip" aria-label="Verdict types">
+            <span class="rule-pill">Use agents</span>
+            <span class="rule-pill">Use with review</span>
+            <span class="rule-pill">Do not delegate yet</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="calculator" aria-label="Agent ROI calculator">
+        <form id="roiForm" class="input-panel" aria-labelledby="inputs-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="inputs-title">Enter the estimate</h2>
+              <p>Start with rough numbers. The point is not perfect accounting; it is deciding whether the next run deserves more trust.</p>
+            </div>
+            <span class="sample-badge">Public example</span>
+          </div>
+
+          <div class="control-list">
+            <div class="control-row">
+              <div>
+                <label for="humanMinutes">Human baseline minutes</label>
+                <p class="hint">How long the task usually takes without agent help.</p>
+                <input id="humanMinutesRange" type="range" min="5" max="480" step="5" value="90" aria-label="Human baseline minutes slider">
+              </div>
+              <div>
+                <input id="humanMinutes" type="number" min="5" max="480" step="5" value="90" inputmode="numeric">
+                <div class="unit-label">minutes</div>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div>
+                <label for="agentMinutes">Agent minutes</label>
+                <p class="hint">How long the agent run takes, including setup and waiting.</p>
+                <input id="agentMinutesRange" type="range" min="0" max="240" step="5" value="18" aria-label="Agent minutes slider">
+              </div>
+              <div>
+                <input id="agentMinutes" type="number" min="0" max="240" step="5" value="18" inputmode="numeric">
+                <div class="unit-label">minutes</div>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div>
+                <label for="reviewMinutes">Review minutes</label>
+                <p class="hint">How long a human needs to inspect, test, edit, or approve the result.</p>
+                <input id="reviewMinutesRange" type="range" min="0" max="240" step="5" value="20" aria-label="Review minutes slider">
+              </div>
+              <div>
+                <input id="reviewMinutes" type="number" min="0" max="240" step="5" value="20" inputmode="numeric">
+                <div class="unit-label">minutes</div>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div>
+                <label for="taskValue">Task value dollars</label>
+                <p class="hint">The value of getting this task done correctly.</p>
+                <input id="taskValueRange" type="range" min="50" max="5000" step="50" value="600" aria-label="Task value dollars slider">
+              </div>
+              <div>
+                <input id="taskValue" type="number" min="50" max="5000" step="50" value="600" inputmode="numeric">
+                <div class="unit-label">dollars</div>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <div>
+                <label for="riskPenalty">Risk penalty dollars</label>
+                <p class="hint">The expected downside if the result is wrong or needs cleanup.</p>
+                <input id="riskPenaltyRange" type="range" min="0" max="3000" step="25" value="80" aria-label="Risk penalty dollars slider">
+              </div>
+              <div>
+                <input id="riskPenalty" type="number" min="0" max="3000" step="25" value="80" inputmode="numeric">
+                <div class="unit-label">dollars</div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <section class="result-panel" aria-labelledby="verdict-title" aria-live="polite">
+          <div id="verdictBox" class="verdict review">
+            <p class="verdict-label">Verdict</p>
+            <h2 id="verdict-title">Use with review</h2>
+            <p id="verdictReason">The agent path is useful, but review time or downside is still large enough to keep a human close.</p>
+          </div>
+
+          <div class="metric-list" aria-label="Computed ROI results">
+            <div class="metric">
+              <span>Time saved</span>
+              <strong id="timeSaved">52 min</strong>
+            </div>
+            <div class="metric">
+              <span>Net value</span>
+              <strong id="netValue">$267</strong>
+            </div>
+            <div class="metric">
+              <span>ROI multiple</span>
+              <strong id="roiMultiple">1.80x</strong>
+            </div>
+          </div>
+
+          <p id="plainResult" class="plain-result">The agent route uses 38 minutes instead of 90 minutes. After review and the risk penalty, it keeps about $267 of value.</p>
+        </section>
+      </section>
+
+      <section class="note-panel" aria-labelledby="review-note-title">
+        <div class="panel-heading">
+          <div>
+            <h2 id="review-note-title">copy this review note</h2>
+            <p>Paste this into a README, PR, issue, or decision record after you run the numbers.</p>
+          </div>
+        </div>
+        <textarea id="reviewNote" readonly aria-label="Copyable agent ROI review note"></textarea>
+        <div class="note-actions">
+          <button id="copyButton" type="button">Copy note</button>
+          <span id="copyStatus" class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+      </section>
+
+      <section class="explain-panel" aria-labelledby="rules-title">
+        <div class="panel-heading">
+          <div>
+            <h2 id="rules-title">How the verdict is read</h2>
+            <p>The calculator converts minutes into dollars using the task value and the human baseline. Then it subtracts agent time, review time, and risk.</p>
+          </div>
+        </div>
+        <div class="explain-grid">
+          <article class="explain-item">
+            <h3>Use agents</h3>
+            <p>The run saves time, net value is positive, ROI is strong, and review is not doing most of the work.</p>
+          </article>
+          <article class="explain-item">
+            <h3>Use with review</h3>
+            <p>The run is useful, but risk or review time is still large enough that a human should stay close.</p>
+          </article>
+          <article class="explain-item">
+            <h3>Do not delegate yet</h3>
+            <p>The task loses time, loses value, or carries more downside than the current agent path can justify.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Steven Chou</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var fields = [
+        { id: "humanMinutes", min: 5, max: 480 },
+        { id: "agentMinutes", min: 0, max: 240 },
+        { id: "reviewMinutes", min: 0, max: 240 },
+        { id: "taskValue", min: 50, max: 5000 },
+        { id: "riskPenalty", min: 0, max: 3000 }
+      ];
+
+      var verdictBox = document.getElementById("verdictBox");
+      var verdictTitle = document.getElementById("verdict-title");
+      var verdictReason = document.getElementById("verdictReason");
+      var roiForm = document.getElementById("roiForm");
+      var timeSavedNode = document.getElementById("timeSaved");
+      var netValueNode = document.getElementById("netValue");
+      var roiMultipleNode = document.getElementById("roiMultiple");
+      var plainResult = document.getElementById("plainResult");
+      var reviewNote = document.getElementById("reviewNote");
+      var copyButton = document.getElementById("copyButton");
+      var copyStatus = document.getElementById("copyStatus");
+
+      function clamp(value, min, max) {
+        var next = Number(value);
+        if (!Number.isFinite(next)) next = min;
+        return Math.min(max, Math.max(min, next));
+      }
+
+      function getValue(id) {
+        return Number(document.getElementById(id).value);
+      }
+
+      function formatMoney(value) {
+        var sign = value < 0 ? "-" : "";
+        return sign + "$" + Math.abs(value).toLocaleString("en-US", {
+          maximumFractionDigits: 0
+        });
+      }
+
+      function formatMinutes(value) {
+        var rounded = Math.round(value);
+        return (rounded >= 0 ? "" : "-") + Math.abs(rounded) + " min";
+      }
+
+      function formatRoi(value) {
+        if (!Number.isFinite(value)) return "Open-ended";
+        return value.toFixed(value >= 10 ? 1 : 2) + "x";
+      }
+
+      function describeNetValue(value) {
+        if (value >= 0) return "keeps about " + formatMoney(value) + " of value";
+        return "loses about " + formatMoney(Math.abs(value)) + " of value";
+      }
+
+      function setVerdict(kind, title, reason) {
+        verdictBox.className = "verdict " + kind;
+        verdictTitle.textContent = title;
+        verdictReason.textContent = reason;
+      }
+
+      function calculate() {
+        var humanMinutes = getValue("humanMinutes");
+        var agentMinutes = getValue("agentMinutes");
+        var reviewMinutes = getValue("reviewMinutes");
+        var taskValue = getValue("taskValue");
+        var riskPenalty = getValue("riskPenalty");
+        var agentPathMinutes = agentMinutes + reviewMinutes;
+        var timeSaved = humanMinutes - agentPathMinutes;
+        var valuePerMinute = taskValue / humanMinutes;
+        var agentPathCost = agentPathMinutes * valuePerMinute + riskPenalty;
+        var netValue = taskValue - agentPathCost;
+        var roiMultiple = agentPathCost > 0 ? taskValue / agentPathCost : Infinity;
+        var reviewShare = reviewMinutes / humanMinutes;
+        var riskShare = riskPenalty / taskValue;
+        var verdict = "Use agents";
+        var reason = "The agent path saves time and leaves enough value after review and risk.";
+        var noteAction = "keep using the agent for this task";
+
+        if (timeSaved <= 0 || netValue <= 0 || roiMultiple < 1) {
+          verdict = "Do not delegate yet";
+          reason = "The current agent path does not beat the human baseline after review time and risk are counted.";
+          noteAction = "keep this task with a human until the agent path is faster or safer";
+          setVerdict("stop", verdict, reason);
+        } else if (roiMultiple >= 2 && riskShare <= 0.25 && reviewShare <= 0.35) {
+          verdict = "Use agents";
+          reason = "The agent path saves meaningful time, has a strong ROI, and does not need heavy review.";
+          noteAction = "keep using the agent and consider giving it a little more repeat work";
+          setVerdict("", verdict, reason);
+        } else {
+          verdict = "Use with review";
+          reason = "The agent path is useful, but review time or downside is still large enough to keep a human close.";
+          noteAction = "use the agent, but keep review as a required step";
+          setVerdict("review", verdict, reason);
+        }
+
+        timeSavedNode.textContent = formatMinutes(timeSaved);
+        netValueNode.textContent = formatMoney(netValue);
+        roiMultipleNode.textContent = formatRoi(roiMultiple);
+
+        plainResult.textContent =
+          "The agent route uses " + agentPathMinutes + " minutes instead of " + humanMinutes +
+          " minutes. After review and the risk penalty, it " +
+          describeNetValue(netValue) + ".";
+
+        reviewNote.value =
+          "Agent ROI sanity check\n" +
+          "- Human baseline: " + humanMinutes + " minutes\n" +
+          "- Agent run: " + agentMinutes + " minutes\n" +
+          "- Human review: " + reviewMinutes + " minutes\n" +
+          "- Time saved: " + formatMinutes(timeSaved) + "\n" +
+          "- Task value if correct: " + formatMoney(taskValue) + "\n" +
+          "- Risk penalty: " + formatMoney(riskPenalty) + "\n" +
+          "- Net value after agent time, review, and risk: " + formatMoney(netValue) + "\n" +
+          "- ROI multiple: " + formatRoi(roiMultiple) + "\n" +
+          "- Verdict: " + verdict + "\n\n" +
+          "Decision: I would " + noteAction + ". " + reason;
+      }
+
+      fields.forEach(function (field) {
+        var numberInput = document.getElementById(field.id);
+        var rangeInput = document.getElementById(field.id + "Range");
+
+        function syncFrom(source, target) {
+          var next = clamp(source.value, field.min, field.max);
+          source.value = next;
+          target.value = next;
+          copyStatus.textContent = "";
+          calculate();
+        }
+
+        numberInput.addEventListener("input", function () {
+          syncFrom(numberInput, rangeInput);
+        });
+
+        rangeInput.addEventListener("input", function () {
+          syncFrom(rangeInput, numberInput);
+        });
+      });
+
+      roiForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+      });
+
+      copyButton.addEventListener("click", function () {
+        var text = reviewNote.value;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            copyStatus.textContent = "Copied.";
+          }).catch(function () {
+            reviewNote.focus();
+            reviewNote.select();
+            copyStatus.textContent = "Select the note and copy it.";
+          });
+        } else {
+          reviewNote.focus();
+          reviewNote.select();
+          copyStatus.textContent = "Select the note and copy it.";
+        }
+      });
+
+      calculate();
+    }());
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+Agent ROI Calculator
+
+Should an agent keep this task, or should you stop delegating it?
+
+This public-safe page gives a visitor a 60-second sanity check for deciding
+whether an AI agent task is worth repeating. It uses public example numbers
+only. It runs entirely in the browser and keeps the example generic.
+
+Inputs
+
+- Human baseline minutes: how long the task usually takes without agent help.
+- Agent minutes: how long the agent run takes, including setup and waiting.
+- Review minutes: how long a human needs to inspect, test, edit, or approve the
+  result.
+- Task value dollars: the value of getting the task done correctly.
+- Risk penalty dollars: the expected downside if the result is wrong or needs
+  cleanup.
+
+Outputs
+
+- Time saved: human baseline minutes minus agent minutes and review minutes.
+- Net value: task value minus the dollar value of agent/review time and the
+  risk penalty.
+- ROI multiple: task value divided by the estimated cost of the agent path.
+- Verdict: Use agents, Use with review, or Do not delegate yet.
+
+Verdict rules in plain English
+
+Use agents when the run saves meaningful time, leaves positive value after
+review and risk, has a strong ROI multiple, and does not need heavy review.
+
+Use with review when the run is useful, but review time or downside is still
+large enough that a human should stay close.
+
+Do not delegate yet when the task loses time, loses value, or carries more
+downside than the current agent path can justify.
+
+Copyable review note
+
+The HTML page includes a readonly "copy this review note" field that updates as
+the numbers change. It records the human baseline, agent minutes, review
+minutes, time saved, task value, risk penalty, net value, ROI multiple, verdict,
+and a short decision sentence suitable for a README, PR, issue, or decision
+record.
+
+Public URL
+
+https://stevenchouai.github.io/proof-chain/roi-calculator/

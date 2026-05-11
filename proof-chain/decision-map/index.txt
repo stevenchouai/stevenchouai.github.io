@@ -115,10 +115,13 @@ unpublished runtime data.
 
 Where to go next
 
-Use the 60-second quickstart when you want a fixed route. Use the evidence audit
-when you want a reviewer-style checklist for the same public proof chain.
+Use the 60-second quickstart when you want a fixed route. Use the ROI calculator
+when you want to decide whether an agent task deserves another run. Use the
+evidence audit when you want a reviewer-style checklist for the same public
+proof chain.
 
 Links:
 https://stevenchouai.github.io/proof-chain/quickstart/
+https://stevenchouai.github.io/proof-chain/roi-calculator/
 https://stevenchouai.github.io/proof-chain/audit/
 https://stevenchouai.github.io/proof-chain/
