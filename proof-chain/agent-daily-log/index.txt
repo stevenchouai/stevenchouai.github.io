@@ -1,0 +1,41 @@
+Three-agent daily product log
+
+Follow the daily agent work without reading repo diffs.
+
+Steven Chou's daily product log uses three plain roles:
+
+1. Product picker
+Chooses the smallest public change that would make the work easier to
+understand today. The picker keeps scope narrow and names the visitor value
+before code is touched.
+
+2. Code builder
+Makes the change in public files, keeps the implementation simple where
+possible, and leaves enough evidence for another person to inspect the result.
+
+3. Skeptical visitor reviewer
+Reads the finished work like an outsider. The reviewer looks for missing links,
+vague claims, confusing copy, broken checks, and anything that sounds private or
+overstated.
+
+What gets logged:
+
+- Shipped thing: the concrete page, post, demo, repo change, or cleanup that
+  reached the public surface.
+- Public evidence: the URL, pull request, blog post, page, or repository link a
+  visitor can open.
+- Tests/checks: the parser pass, grep, diff check, manual review, or other check
+  that kept the change grounded.
+- Next risk: the next thing most likely to confuse a visitor, age badly, or need
+  a follow-up.
+
+Latest public example:
+
+- Public log: https://stevenchouai.github.io/blog/daily-builder-log-2026-05-11/
+- Start here: https://stevenchouai.github.io/proof-chain/quickstart/
+
+Privacy boundary:
+
+This page only explains the public daily pattern. It does not expose private
+vault locations, secrets, client or user records, sensitive workplace details,
+raw local transcripts, or unpublished run data.

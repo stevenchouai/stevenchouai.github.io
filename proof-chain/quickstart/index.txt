@@ -47,6 +47,14 @@ claim that Steven's private notes, raw runs, or local runtime are public evidenc
 
 Expected time: 15 seconds
 
+Three-agent daily product log
+
+See how each day is split into Product picker, Code builder, and Skeptical
+visitor reviewer.
+
+What to click:
+- https://stevenchouai.github.io/proof-chain/agent-daily-log/
+
 Next stop after the 60-second route
 
 If you have another minute, use the decision map to choose the proof that

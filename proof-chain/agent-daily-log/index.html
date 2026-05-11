@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>Three-agent daily product log</title>
+  <meta name="description" content="A public-safe explainer for Steven Chou's daily three-agent product log: product picker, code builder, and skeptical visitor reviewer.">
+  <meta name="application-name" content="Steven Chou - AI Product Engineer">
+  <link rel="canonical" href="https://stevenchouai.github.io/proof-chain/agent-daily-log/">
+  <link rel="stylesheet" href="/_next/static/css/fe609adb6858aaed.css">
+  <link rel="icon" href="/favicon.ico?603d046c9a6fdfbb" type="image/x-icon" sizes="16x16">
+  <style>
+    :root {
+      color-scheme: light;
+      --log-bg: #f4f1ea;
+      --log-ink: #171817;
+      --log-muted: #5e625f;
+      --log-soft: #fffdf7;
+      --log-line: #d8cfbf;
+      --log-green: #0d6b5b;
+      --log-blue: #1e3f68;
+      --log-rust: #955a18;
+      --log-shadow: 0 18px 48px rgba(23, 24, 23, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(13, 107, 91, 0.13), transparent 330px),
+        linear-gradient(180deg, rgba(30, 63, 104, 0.08), transparent 460px),
+        repeating-linear-gradient(0deg, rgba(23, 24, 23, 0.026) 0 1px, transparent 1px 34px),
+        var(--log-bg);
+      color: var(--log-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(13, 107, 91, 0.34);
+      outline-offset: 3px;
+    }
+
+    .log-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      z-index: 10;
+      transform: translateY(-160%);
+      border-radius: 999px;
+      background: var(--log-ink);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .log-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      color: var(--log-muted);
+      font-size: 14px;
+    }
+
+    .log-nav a {
+      text-decoration: none;
+    }
+
+    .log-nav strong {
+      color: var(--log-ink);
+      font-size: 16px;
+    }
+
+    .log-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 34px;
+      align-items: end;
+      padding: 50px 0 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--log-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 0;
+      font-size: clamp(38px, 5.9vw, 72px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 730px;
+      margin: 22px 0 0;
+      color: var(--log-muted);
+      font-size: 19px;
+      line-height: 1.74;
+    }
+
+    .hero-panel,
+    .role-card,
+    .log-card,
+    .example-panel,
+    .privacy-panel {
+      border: 1px solid var(--log-line);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, 0.88);
+      box-shadow: var(--log-shadow);
+    }
+
+    .hero-panel {
+      padding: 20px;
+    }
+
+    .hero-panel h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .hero-panel p {
+      margin: 10px 0 0;
+      color: var(--log-muted);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .daily-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .strip-step {
+      min-height: 74px;
+      border: 1px solid var(--log-line);
+      border-radius: 8px;
+      background: white;
+      padding: 11px;
+    }
+
+    .strip-step span {
+      display: block;
+      color: var(--log-rust);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .strip-step strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.18;
+    }
+
+    .quick-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--log-muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--log-line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+
+    .section-heading {
+      margin: 42px 0 16px;
+      max-width: 760px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(27px, 3vw, 38px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-heading p {
+      margin: 12px 0 0;
+      color: var(--log-muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .role-card {
+      min-height: 100%;
+      padding: 22px;
+    }
+
+    .role-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #132924;
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .role-card h3 {
+      margin: 16px 0 10px;
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .role-card p {
+      margin: 0;
+      color: var(--log-muted);
+      font-size: 15px;
+      line-height: 1.66;
+    }
+
+    .role-card strong {
+      color: var(--log-ink);
+    }
+
+    .log-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .log-card {
+      padding: 20px;
+    }
+
+    .log-card span {
+      color: var(--log-rust);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .log-card h3 {
+      margin: 11px 0 9px;
+      font-size: 20px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .log-card p {
+      margin: 0;
+      color: var(--log-muted);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .example-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 330px);
+      gap: 24px;
+      align-items: start;
+      margin-top: 18px;
+      padding: 24px;
+    }
+
+    .example-panel h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .example-panel p {
+      margin: 12px 0 0;
+      color: var(--log-muted);
+      line-height: 1.68;
+    }
+
+    .example-links {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .example-links a {
+      display: block;
+      border: 1px solid var(--log-line);
+      border-radius: 8px;
+      background: white;
+      padding: 14px;
+      text-decoration: none;
+    }
+
+    .example-links span {
+      display: block;
+      color: var(--log-rust);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .example-links strong {
+      display: block;
+      margin-top: 6px;
+      color: var(--log-ink);
+      font-size: 15px;
+      line-height: 1.28;
+    }
+
+    .privacy-panel {
+      margin: 18px 0 0;
+      padding: 24px;
+      border-color: rgba(149, 90, 24, 0.34);
+      background: rgba(255, 248, 237, 0.9);
+    }
+
+    .privacy-panel h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .privacy-panel p {
+      max-width: 870px;
+      margin: 10px 0 0;
+      color: var(--log-muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 46px;
+      border-top: 1px solid var(--log-line);
+      padding: 24px 0 34px;
+      color: var(--log-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .example-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .roles,
+      .log-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .log-shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .log-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .roles,
+      .log-grid,
+      .daily-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .role-card,
+      .log-card,
+      .example-panel,
+      .privacy-panel {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="log-shell">
+    <header class="log-nav">
+      <a href="/"><strong>Steven Chou</strong></a>
+      <nav class="log-nav-links" aria-label="Agent daily log navigation">
+        <a href="/proof-chain/">Proof chain</a>
+        <a href="/proof-chain/quickstart/">Quickstart</a>
+        <a href="/blog/">Blog</a>
+        <a href="https://github.com/stevenchouai" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Three-agent daily product log</p>
+          <h1 id="page-title">Follow the daily agent work without reading repo diffs.</h1>
+          <p class="lede">Each day is split into three plain roles: one picks the product move, one builds it, and one reviews it like a skeptical visitor who only cares what is visible in public.</p>
+          <div class="quick-points" aria-label="Daily log summary">
+            <span class="pill">One day</span>
+            <span class="pill">Three roles</span>
+            <span class="pill">Public links only</span>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Daily flow sketch">
+          <h2>The daily pass</h2>
+          <p>The log is a short receipt for what changed, where a visitor can inspect it, what was checked, and what risk should be watched next.</p>
+          <div class="daily-strip" aria-label="Three role sequence">
+            <div class="strip-step">
+              <span>Pick</span>
+              <strong>Choose one useful public change.</strong>
+            </div>
+            <div class="strip-step">
+              <span>Build</span>
+              <strong>Ship the page, post, or repo update.</strong>
+            </div>
+            <div class="strip-step">
+              <span>Review</span>
+              <strong>Ask whether the proof is clear.</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section aria-labelledby="roles-title">
+        <div class="section-heading">
+          <h2 id="roles-title">The three roles</h2>
+          <p>The names are simple on purpose. A visitor should be able to understand the daily workflow without knowing the tools behind it.</p>
+        </div>
+        <div class="roles">
+          <article class="role-card">
+            <span class="role-mark">01</span>
+            <h3>Product picker</h3>
+            <p><strong>Job:</strong> choose the smallest public change that would make Steven's work easier to understand today. The picker keeps the scope narrow and names the expected visitor value before any code is touched.</p>
+          </article>
+          <article class="role-card">
+            <span class="role-mark">02</span>
+            <h3>Code builder</h3>
+            <p><strong>Job:</strong> make the change in public files, keep the implementation boring where possible, and leave enough evidence for someone else to inspect the result later.</p>
+          </article>
+          <article class="role-card">
+            <span class="role-mark">03</span>
+            <h3>Skeptical visitor reviewer</h3>
+            <p><strong>Job:</strong> read the finished work like an outsider. The reviewer looks for missing links, vague claims, confusing copy, broken checks, and anything that sounds private or overstated.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="logged-title">
+        <div class="section-heading">
+          <h2 id="logged-title">What gets logged</h2>
+          <p>The daily entry is short enough to scan, but specific enough to be useful after the day is over.</p>
+        </div>
+        <div class="log-grid">
+          <article class="log-card">
+            <span>01</span>
+            <h3>Shipped thing</h3>
+            <p>The concrete page, post, demo, repo change, or cleanup that reached the public surface.</p>
+          </article>
+          <article class="log-card">
+            <span>02</span>
+            <h3>Public evidence</h3>
+            <p>The URL, pull request, blog post, screenshot-friendly page, or repository link a visitor can open.</p>
+          </article>
+          <article class="log-card">
+            <span>03</span>
+            <h3>Tests/checks</h3>
+            <p>The parser pass, grep, diff check, manual review, or other check that kept the change from being hand-wavy.</p>
+          </article>
+          <article class="log-card">
+            <span>04</span>
+            <h3>Next risk</h3>
+            <p>The next thing most likely to confuse a visitor, age badly, or need a follow-up before the proof trail feels complete.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="example-panel" aria-labelledby="example-title">
+        <div>
+          <h2 id="example-title">Latest public example</h2>
+          <p>The May 11, 2026 daily builder log is the current example this page points to. It is a reader-facing summary of what the three roles shipped, checked, and still need to watch.</p>
+        </div>
+        <ul class="example-links">
+          <li>
+            <a href="/blog/daily-builder-log-2026-05-11/">
+              <span>Public log</span>
+              <strong>Daily builder log for 2026-05-11</strong>
+            </a>
+          </li>
+          <li>
+            <a href="/proof-chain/quickstart/">
+              <span>Start here</span>
+              <strong>60-second proof-chain quickstart</strong>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="privacy-panel" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy boundary</h2>
+        <p>This page only explains the public daily pattern. It does not expose private vault locations, secrets, client or user records, sensitive workplace details, raw local transcripts, or unpublished run data.</p>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Steven Chou</span>
+    </footer>
+  </div>
+</body>
+</html>

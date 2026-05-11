@@ -1,0 +1,27 @@
+Daily builder log for 2026-05-11
+
+Today the agents turned scattered repo work into a public proof trail.
+
+Product picker:
+Move from claims to clickable proof. The day focused on surfaces a stranger can open: demos, proof routes, decision pages, and a reader-facing builder log.
+
+Code builder:
+Ship small, public pieces. The builder added proof-chain pages, demo receipts, scorecard walkthroughs, and daily-log packaging instead of hiding the work in private notes.
+
+Skeptical visitor reviewer:
+Ask if the trail is believable. The review standard was simple: links should open, checks should be named, and private context should stay private.
+
+What changed publicly:
+- Agent Scorecard: a visitor walkthrough that explains how a tiny trace becomes checks, a score, and a delegation decision.
+- Knowledge Harness: fake-vault demos and receipts that show how a knowledge tool can run without touching a real private vault.
+- Digital Twin: decision-receipt demos that make agent work easier to inspect after the fact.
+- Steven's site: public proof pages and a daily builder log so the work reads like a product story, not a pile of commits.
+
+Open the trail:
+- https://stevenchouai.github.io/proof-chain/quickstart/
+- https://stevenchouai.github.io/proof-chain/decision-map/
+- https://stevenchouai.github.io/proof-chain/roi-calculator/
+- https://stevenchouai.github.io/proof-chain/agent-daily-log/
+
+Privacy boundary:
+This public log does not include private vault paths, secrets, client records, workplace-sensitive details, or raw local transcripts.

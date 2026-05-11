@@ -147,6 +147,50 @@
       white-space: nowrap;
     }
 
+    .daily-log-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      margin-top: 8px;
+      border: 1px solid var(--quick-line);
+      border-radius: 8px;
+      background: var(--quick-soft);
+      box-shadow: var(--quick-shadow);
+      padding: 18px 20px;
+      text-decoration: none;
+    }
+
+    .daily-log-card span {
+      color: var(--quick-accent-2);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .daily-log-card strong {
+      display: block;
+      margin-top: 6px;
+      color: var(--quick-ink);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .daily-log-card p {
+      margin: 8px 0 0;
+      color: var(--quick-muted);
+      font-size: 14px;
+      line-height: 1.58;
+    }
+
+    .daily-log-card em {
+      color: var(--quick-accent);
+      font-style: normal;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
     .steps {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -306,6 +350,10 @@
         flex-direction: column;
       }
 
+      .daily-log-card {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
         padding-top: 34px;
       }
@@ -345,6 +393,15 @@
           <span class="pill">No local setup</span>
         </div>
       </section>
+
+      <a class="daily-log-card" href="/proof-chain/agent-daily-log/">
+        <span>New proof-chain route</span>
+        <div>
+          <strong>Three-agent daily product log</strong>
+          <p>See how each day is split into Product picker, Code builder, and Skeptical visitor reviewer.</p>
+        </div>
+        <em>Open daily log</em>
+      </a>
 
       <section class="steps" aria-label="Four quickstart steps">
         <article class="step-card">
