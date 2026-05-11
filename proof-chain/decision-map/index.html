@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <title>Proof Chain Decision Map</title>
+  <meta name="description" content="A two-minute decision map for choosing which public Steven Chou proof artifact to inspect first.">
+  <meta name="application-name" content="Steven Chou - AI Product Engineer">
+  <link rel="canonical" href="https://stevenchouai.github.io/proof-chain/decision-map/">
+  <link rel="stylesheet" href="/_next/static/css/fe609adb6858aaed.css">
+  <link rel="icon" href="/favicon.ico?603d046c9a6fdfbb" type="image/x-icon" sizes="16x16">
+  <style>
+    :root {
+      color-scheme: light;
+      --map-bg: #f7f4ed;
+      --map-ink: #161616;
+      --map-muted: #5c5f63;
+      --map-soft: #fffdf8;
+      --map-line: #d9d0c4;
+      --map-accent: #0e6b5d;
+      --map-accent-2: #7d4b16;
+      --map-accent-3: #243b63;
+      --map-shadow: 0 18px 48px rgba(22, 22, 22, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(14, 107, 93, 0.12), transparent 340px),
+        linear-gradient(180deg, rgba(36, 59, 99, 0.08), transparent 420px),
+        var(--map-bg);
+      color: var(--map-ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(14, 107, 93, 0.35);
+      outline-offset: 3px;
+    }
+
+    .map-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-160%);
+      border-radius: 999px;
+      background: var(--map-ink);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .map-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      color: var(--map-muted);
+      font-size: 14px;
+    }
+
+    .map-nav a {
+      text-decoration: none;
+    }
+
+    .map-nav strong {
+      color: var(--map-ink);
+      font-size: 16px;
+    }
+
+    .map-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+      gap: 28px;
+      align-items: end;
+      padding: 48px 0 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--map-accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 840px;
+      font-size: clamp(36px, 5.8vw, 70px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 740px;
+      margin: 22px 0 0;
+      color: var(--map-muted);
+      font-size: 19px;
+      line-height: 1.72;
+    }
+
+    .route-panel {
+      border: 1px solid var(--map-line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.8);
+      box-shadow: var(--map-shadow);
+      padding: 20px;
+    }
+
+    .route-panel h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .route-panel p {
+      margin: 10px 0 0;
+      color: var(--map-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--map-muted);
+      font-size: 13px;
+    }
+
+    .route-list li {
+      display: flex;
+      gap: 9px;
+      align-items: baseline;
+    }
+
+    .route-list span {
+      color: var(--map-accent-2);
+      font-weight: 900;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .decision-card {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      border: 1px solid var(--map-line);
+      border-radius: 8px;
+      background: var(--map-soft);
+      box-shadow: var(--map-shadow);
+      padding: 20px;
+    }
+
+    .card-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--map-accent-2);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .card-number {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #142826;
+      color: white;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .decision-card h2 {
+      margin: 18px 0 0;
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .field {
+      margin-top: 17px;
+    }
+
+    .field-label {
+      margin: 0 0 5px;
+      color: var(--map-accent-3);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .field p {
+      margin: 0;
+      color: var(--map-muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .field a {
+      color: var(--map-ink);
+      font-weight: 800;
+    }
+
+    .proof-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--map-accent);
+      font-size: 15px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .proof-link:hover {
+      text-decoration: underline;
+    }
+
+    .boundary {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 28px;
+      margin-top: 30px;
+      border-top: 1px solid var(--map-line);
+      padding-top: 30px;
+    }
+
+    .boundary h2,
+    .next-stop h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .boundary p,
+    .next-stop p {
+      margin: 0;
+      color: var(--map-muted);
+      font-size: 16px;
+      line-height: 1.72;
+    }
+
+    .boundary ul {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--map-muted);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .boundary li {
+      border-left: 3px solid rgba(14, 107, 93, 0.45);
+      padding-left: 12px;
+    }
+
+    .next-stop {
+      margin-top: 30px;
+      border: 1px solid var(--map-line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.74);
+      padding: 24px;
+    }
+
+    .next-stop p {
+      margin-top: 10px;
+      max-width: 760px;
+    }
+
+    .next-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .next-links a {
+      border: 1px solid var(--map-line);
+      border-radius: 999px;
+      background: white;
+      padding: 8px 13px;
+      color: var(--map-ink);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 46px;
+      border-top: 1px solid var(--map-line);
+      padding: 24px 0 34px;
+      color: var(--map-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 1080px) {
+      .decision-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .decision-card:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .boundary {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .map-shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .map-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .decision-card:first-child {
+        grid-column: auto;
+      }
+
+      .decision-card,
+      .next-stop {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="map-shell">
+    <header class="map-nav">
+      <a href="/"><strong>Steven Chou</strong></a>
+      <nav class="map-nav-links" aria-label="Decision map navigation">
+        <a href="/proof-chain/">Proof chain</a>
+        <a href="/proof-chain/quickstart/">Quickstart</a>
+        <a href="/proof-chain/audit/">Audit</a>
+        <a href="https://github.com/stevenchouai" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="content">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Public proof chain</p>
+          <h1 id="page-title">If you have 2 minutes, choose the proof that matches your question.</h1>
+          <p class="lede">This map turns Steven's public site and repositories into a first-click decision. Pick the question closest to yours, inspect one artifact, then decide whether to go deeper.</p>
+        </div>
+        <aside class="route-panel" aria-label="How to use this page">
+          <h2>Fast read</h2>
+          <p>Each card gives one visitor question, the best public proof, why it matters, and the link to open first.</p>
+          <ul class="route-list">
+            <li><span>01</span> Agent evaluation</li>
+            <li><span>02</span> Personal knowledge runtime</li>
+            <li><span>03</span> Digital twin workflow</li>
+            <li><span>04</span> Coding infrastructure</li>
+            <li><span>05</span> Production QA credibility</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="decision-grid" aria-label="Decision cards">
+        <article class="decision-card">
+          <div class="card-topline">
+            <span>Agent evaluation</span>
+            <span class="card-number">01</span>
+          </div>
+          <h2>Does he know how to judge agent output?</h2>
+          <div class="field">
+            <p class="field-label">Visitor question</p>
+            <p>"Can Steven tell when an agent deserves more budget, permission, or review time?"</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Best proof</p>
+            <p>Agent Scorecard, a public evaluation harness for reading agent traces and turning them into concrete verdicts.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Why it matters</p>
+            <p>Agent work should be judged by evidence: inputs, tool use, artifacts, checks, and final quality. This repo makes that standard inspectable.</p>
+          </div>
+          <a class="proof-link" href="https://github.com/stevenchouai/agent-scorecard" target="_blank" rel="noopener noreferrer">Open Agent Scorecard -></a>
+        </article>
+
+        <article class="decision-card">
+          <div class="card-topline">
+            <span>Knowledge runtime</span>
+            <span class="card-number">02</span>
+          </div>
+          <h2>Can he turn notes into a working product surface?</h2>
+          <div class="field">
+            <p class="field-label">Visitor question</p>
+            <p>"Is there a runnable public version of the personal knowledge workflow, without exposing private notes?"</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Best proof</p>
+            <p><a href="/demo/">Knowledge Harness on the demo page</a>, plus the public repository with fake-vault receipts and tests.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Why it matters</p>
+            <p>It shows the pattern behind a personal knowledge runtime: retrieve from durable files, produce a visible artifact, and keep the private source material out of the public proof.</p>
+          </div>
+          <a class="proof-link" href="https://github.com/stevenchouai/knowledge-harness" target="_blank" rel="noopener noreferrer">Open Knowledge Harness -></a>
+        </article>
+
+        <article class="decision-card">
+          <div class="card-topline">
+            <span>Digital twin workflow</span>
+            <span class="card-number">03</span>
+          </div>
+          <h2>Can he explain an agent workflow in plain terms?</h2>
+          <div class="field">
+            <p class="field-label">Visitor question</p>
+            <p>"Is the digital twin a real operating loop, or just a label for chat prompts?"</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Best proof</p>
+            <p>The <a href="/digital-twin/">Digital Twin page</a> and <a href="https://github.com/stevenchouai/digital-twin" target="_blank" rel="noopener noreferrer">public repo</a>, which describe the retrieve, execute, write-back loop.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Why it matters</p>
+            <p>The artifact makes the workflow legible: useful AI work should leave files, diagrams, essays, or code behind instead of disappearing into chat history.</p>
+          </div>
+          <a class="proof-link" href="/digital-twin/">Open Digital Twin -></a>
+        </article>
+
+        <article class="decision-card">
+          <div class="card-topline">
+            <span>Coding infrastructure</span>
+            <span class="card-number">04</span>
+          </div>
+          <h2>Can he build infrastructure around coding tools?</h2>
+          <div class="field">
+            <p class="field-label">Visitor question</p>
+            <p>"Has Steven built lower-level tooling, not only written about agents?"</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Best proof</p>
+            <p>CLIProxyAPI, a Go proxy server for coding-tool provider routing with OAuth support and multi-provider routing.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Why it matters</p>
+            <p>Agent-era products still need practical plumbing: routing, auth, compatibility layers, and operational defaults that make tools usable.</p>
+          </div>
+          <a class="proof-link" href="https://github.com/stevenchouai/CLIProxyAPI" target="_blank" rel="noopener noreferrer">Open CLIProxyAPI -></a>
+        </article>
+
+        <article class="decision-card">
+          <div class="card-topline">
+            <span>Production QA</span>
+            <span class="card-number">05</span>
+          </div>
+          <h2>Can he be trusted near production quality gates?</h2>
+          <div class="field">
+            <p class="field-label">Visitor question</p>
+            <p>"Is there evidence that Steven thinks like someone responsible for real releases?"</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Best proof</p>
+            <p>The <a href="/experience/">experience page</a> and <a href="/proof-chain/audit/">proof-chain audit</a>, which separate production claims from what can safely be public.</p>
+          </div>
+          <div class="field">
+            <p class="field-label">Why it matters</p>
+            <p>Public proof should not leak employer details. The useful signal is the quality operating model: automation, release control, and clear trust boundaries.</p>
+          </div>
+          <a class="proof-link" href="/experience/">Open experience proof -></a>
+        </article>
+      </section>
+
+      <section class="boundary" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy boundary</h2>
+        <div>
+          <p>This decision map links only to public pages, public GitHub repositories, and public publisher records already used by the site. It does not publish private notes, credentials, employer-sensitive implementation details, raw run logs, or unpublished runtime data.</p>
+          <ul>
+            <li>Public repos can prove code shape, examples, tests, and documentation.</li>
+            <li>Public pages can prove the narrative, diagrams, and privacy-safe operating model.</li>
+            <li>Private production context stays private unless it has been deliberately sanitized into a public artifact.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="next-stop" aria-labelledby="next-title">
+        <h2 id="next-title">Where to go next</h2>
+        <p>Use the 60-second quickstart when you want a fixed route. Use the evidence audit when you want a reviewer-style checklist for the same public proof chain.</p>
+        <div class="next-links">
+          <a href="/proof-chain/quickstart/">60-second quickstart</a>
+          <a href="/proof-chain/audit/">Evidence audit</a>
+          <a href="/proof-chain/">Full proof chain</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Steven Chou</span>
+    </footer>
+  </div>
+</body>
+</html>

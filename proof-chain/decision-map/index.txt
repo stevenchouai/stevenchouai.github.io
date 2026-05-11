@@ -1,0 +1,124 @@
+Proof Chain Decision Map
+
+If you have 2 minutes, choose the proof that matches your question.
+
+This map turns Steven's public site and repositories into a first-click decision.
+Pick the question closest to yours, inspect one artifact, then decide whether to
+go deeper.
+
+Fast read
+
+- Agent evaluation
+- Personal knowledge runtime
+- Digital twin workflow
+- Coding infrastructure
+- Production QA credibility
+
+1. Agent evaluation
+
+Visitor question:
+"Can Steven tell when an agent deserves more budget, permission, or review time?"
+
+Best proof:
+Agent Scorecard, a public evaluation harness for reading agent traces and
+turning them into concrete verdicts.
+
+Why it matters:
+Agent work should be judged by evidence: inputs, tool use, artifacts, checks,
+and final quality. This repo makes that standard inspectable.
+
+Link:
+https://github.com/stevenchouai/agent-scorecard
+
+2. Personal knowledge runtime
+
+Visitor question:
+"Is there a runnable public version of the personal knowledge workflow, without
+exposing private notes?"
+
+Best proof:
+Knowledge Harness on the demo page, plus the public repository with fake-vault
+receipts and tests.
+
+Why it matters:
+It shows the pattern behind a personal knowledge runtime: retrieve from durable
+files, produce a visible artifact, and keep the private source material out of
+the public proof.
+
+Links:
+https://stevenchouai.github.io/demo/
+https://github.com/stevenchouai/knowledge-harness
+
+3. Digital twin workflow
+
+Visitor question:
+"Is the digital twin a real operating loop, or just a label for chat prompts?"
+
+Best proof:
+The Digital Twin page and public repo, which describe the retrieve, execute,
+write-back loop.
+
+Why it matters:
+The artifact makes the workflow legible: useful AI work should leave files,
+diagrams, essays, or code behind instead of disappearing into chat history.
+
+Links:
+https://stevenchouai.github.io/digital-twin/
+https://github.com/stevenchouai/digital-twin
+
+4. Coding infrastructure
+
+Visitor question:
+"Has Steven built lower-level tooling, not only written about agents?"
+
+Best proof:
+CLIProxyAPI, a Go proxy server for coding-tool provider routing with OAuth
+support and multi-provider routing.
+
+Why it matters:
+Agent-era products still need practical plumbing: routing, auth, compatibility
+layers, and operational defaults that make tools usable.
+
+Link:
+https://github.com/stevenchouai/CLIProxyAPI
+
+5. Production QA credibility
+
+Visitor question:
+"Is there evidence that Steven thinks like someone responsible for real
+releases?"
+
+Best proof:
+The experience page and proof-chain audit, which separate production claims from
+what can safely be public.
+
+Why it matters:
+Public proof should not leak employer details. The useful signal is the quality
+operating model: automation, release control, and clear trust boundaries.
+
+Links:
+https://stevenchouai.github.io/experience/
+https://stevenchouai.github.io/proof-chain/audit/
+
+Privacy boundary
+
+This decision map links only to public pages, public GitHub repositories, and
+public publisher records already used by the site. It does not publish private
+notes, credentials, employer-sensitive implementation details, raw run logs, or
+unpublished runtime data.
+
+- Public repos can prove code shape, examples, tests, and documentation.
+- Public pages can prove the narrative, diagrams, and privacy-safe operating
+  model.
+- Private production context stays private unless it has been deliberately
+  sanitized into a public artifact.
+
+Where to go next
+
+Use the 60-second quickstart when you want a fixed route. Use the evidence audit
+when you want a reviewer-style checklist for the same public proof chain.
+
+Links:
+https://stevenchouai.github.io/proof-chain/quickstart/
+https://stevenchouai.github.io/proof-chain/audit/
+https://stevenchouai.github.io/proof-chain/
