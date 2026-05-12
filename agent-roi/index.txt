@@ -1,0 +1,54 @@
+Agent ROI Calculator
+https://stevenchouai.github.io/agent-roi/
+
+Purpose
+This public-safe demo turns a repeatable agent task into an estimate of monthly time saved, monthly net value, and evidence needed before trusting the result.
+
+Task examples
+1. Support triage
+Sort repeat tickets and draft next actions.
+Default assumptions: 160 tasks per month, 6 minutes saved per task, $45 hourly cost, 20% review overhead.
+
+2. QA regression review
+Summarize changed areas and risky checks.
+Default assumptions: 80 tasks per month, 18 minutes saved per task, $75 hourly cost, 25% review overhead.
+
+3. Repo proof packaging
+Turn shipped work into public-safe evidence.
+Default assumptions: 24 tasks per month, 45 minutes saved per task, $90 hourly cost, 30% review overhead.
+
+Formula
+Gross hours saved = monthly task count x minutes saved per task / 60.
+Review hours = gross hours saved x review overhead percent.
+Monthly hours saved = gross hours saved - review hours.
+Monthly net value = monthly hours saved x hourly cost.
+
+Trust before speed
+An agent result is only useful if it leaves evidence:
+- Input: the task request, relevant files, ticket fields, or public source links.
+- Checks run: commands, comparisons, test results, or inspection steps used to catch mistakes.
+- Result: the summary, patch, classification, or packaged proof the agent produced.
+- Reviewer decision: approved, revised, rejected, or escalated with a short reason.
+
+Evidence examples
+Support triage:
+- A small ticket sample with private details removed.
+- The routing labels or answer categories the agent used.
+- A pass over edge cases where the draft could be wrong.
+- The reviewer decision for each sampled result.
+
+QA regression review:
+- The release scope, changed files, or feature notes being reviewed.
+- The checks run, including test names, commands, or inspection steps.
+- A list of high-risk areas the agent flagged and why.
+- The reviewer decision on what must be tested manually.
+
+Repo proof packaging:
+- Public source links that support the claim.
+- Sanitized screenshots, command output, or page links.
+- The verification step used before publishing.
+- The reviewer decision: publish, revise, or keep private.
+
+Related pages
+Proof Chain: https://stevenchouai.github.io/proof-chain/
+Projects route: https://stevenchouai.github.io/projects/

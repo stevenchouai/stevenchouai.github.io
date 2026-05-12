@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>Agent ROI Calculator · Steven Chou</title>
+  <meta name="description" content="A small public-safe calculator that turns repeatable agent tasks into monthly time saved, net value, and evidence required before trusting the result.">
+  <link rel="canonical" href="https://stevenchouai.github.io/agent-roi/">
+  <link rel="alternate" type="text/plain" href="https://stevenchouai.github.io/agent-roi/index.txt">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7faf8;
+      --surface: #ffffff;
+      --surface-2: #eef6f3;
+      --ink: #17231f;
+      --muted: #5d6c66;
+      --muted-2: #778680;
+      --line: #d8e3dd;
+      --accent: #0f766e;
+      --accent-2: #155aa8;
+      --accent-3: #a35c12;
+      --shadow: 0 18px 60px rgba(20, 42, 34, 0.09);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #0f1714;
+        --surface: #17211d;
+        --surface-2: #10251f;
+        --ink: #edf7f2;
+        --muted: #a6b5af;
+        --muted-2: #879690;
+        --line: #2a3a34;
+        --accent: #38b9a9;
+        --accent-2: #7bb7ff;
+        --accent-3: #e8a85e;
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.08), transparent 38%),
+        linear-gradient(315deg, rgba(21, 90, 168, 0.08), transparent 34%),
+        var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .skip {
+      position: absolute;
+      left: -999px;
+      top: 1rem;
+      z-index: 20;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 0.7rem 1rem;
+    }
+
+    .skip:focus {
+      left: 1rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .container {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.25rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 620;
+    }
+
+    .nav-links a {
+      border-radius: 8px;
+      padding: 0.58rem 0.75rem;
+    }
+
+    .nav-links a[aria-current="page"] {
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      color: var(--accent);
+    }
+
+    main {
+      padding: 3.2rem 0 4.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--muted-2);
+      font-size: 0.74rem;
+      font-weight: 760;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 1rem;
+      font-size: clamp(2.4rem, 6vw, 5.25rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 0.75rem;
+      font-size: clamp(1.55rem, 2.6vw, 2.3rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 0.45rem;
+      font-size: 1.08rem;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin-bottom: 1.4rem;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+    }
+
+    .hero-note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--accent);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-note p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.4rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 720;
+      padding: 0.72rem 1rem;
+    }
+
+    .button.primary {
+      border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+      background: var(--accent);
+      color: white;
+    }
+
+    .button.primary:hover {
+      color: white;
+      filter: brightness(0.96);
+    }
+
+    .section {
+      margin-top: 3rem;
+      border-top: 1px solid var(--line);
+      padding-top: 2.4rem;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 2vw, 1.4rem);
+    }
+
+    .preset-group {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 1.15rem;
+      padding: 0.35rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-2);
+    }
+
+    .preset {
+      min-height: 74px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      padding: 0.72rem;
+      text-align: left;
+    }
+
+    .preset span {
+      display: block;
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 760;
+    }
+
+    .preset small {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
+    .preset.active {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .controls {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 112px;
+      gap: 0.8rem;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.96rem;
+      font-weight: 720;
+    }
+
+    .hint {
+      margin-top: 0.15rem;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 720;
+      padding: 0.65rem 0.7rem;
+    }
+
+    .results {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .metric {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.85rem;
+    }
+
+    .metric:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .metric-label {
+      color: var(--muted-2);
+      font-size: 0.76rem;
+      font-weight: 760;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      margin-top: 0.2rem;
+      color: var(--ink);
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      font-weight: 780;
+      line-height: 1;
+    }
+
+    .metric-sub {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .formula {
+      margin-top: 1rem;
+      border: 1px solid color-mix(in srgb, var(--accent-3) 35%, var(--line));
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--accent-3) 8%, var(--surface));
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 0.85rem;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .evidence-list,
+    .steps {
+      display: grid;
+      gap: 0.7rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .evidence-list li,
+    .steps li {
+      border-left: 3px solid var(--accent);
+      background: color-mix(in srgb, var(--surface-2) 74%, transparent);
+      padding: 0.75rem 0.85rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .steps strong {
+      display: block;
+      margin-bottom: 0.15rem;
+      color: var(--ink);
+    }
+
+    .quiet {
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.6rem 0;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .calculator-grid,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .preset-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0.85rem 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      main {
+        padding-top: 2rem;
+      }
+
+      .control {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/">Steven Chou</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="/proof-chain/">Proof</a>
+        <a aria-current="page" href="/agent-roi/">Agent ROI</a>
+        <a href="/projects/">Projects</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <div class="container">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Public-safe workflow demo</p>
+          <h1 id="page-title">Agent ROI Calculator.</h1>
+          <p class="lead">Turn a repeatable agent task into monthly time saved, cost saved, and the proof a reviewer needs before trusting the result.</p>
+          <div class="links">
+            <a class="button primary" href="#calculator">Open calculator</a>
+            <a class="button" href="/proof-chain/">View proof chain</a>
+            <a class="button" href="/projects/">Projects route</a>
+          </div>
+        </div>
+        <aside class="hero-note" aria-label="Demo boundary">
+          <strong>No private inputs</strong>
+          <p>This demo uses generic task examples and simple math. It does not ask for logs, customer data, account details, or unpublished facts.</p>
+        </aside>
+      </section>
+
+      <section class="section" id="calculator" aria-labelledby="calculator-title">
+        <p class="eyebrow">Two-minute estimate</p>
+        <h2 id="calculator-title">Pick a task, adjust the assumptions, then check the evidence bar.</h2>
+        <div class="calculator-grid">
+          <section class="panel" aria-label="Calculator inputs">
+            <div class="preset-group" role="tablist" aria-label="Task examples">
+              <button class="preset active" type="button" role="tab" aria-selected="true" data-example="support">
+                <span>Support triage</span>
+                <small>Sort repeat tickets and draft next actions.</small>
+              </button>
+              <button class="preset" type="button" role="tab" aria-selected="false" data-example="qa">
+                <span>QA regression review</span>
+                <small>Summarize changed areas and risky checks.</small>
+              </button>
+              <button class="preset" type="button" role="tab" aria-selected="false" data-example="proof">
+                <span>Repo proof packaging</span>
+                <small>Turn shipped work into public-safe evidence.</small>
+              </button>
+            </div>
+
+            <div class="controls">
+              <div class="control">
+                <div>
+                  <label for="tasks-range">Monthly task count</label>
+                  <p class="hint">How often this task repeats in a month.</p>
+                  <input id="tasks-range" type="range" min="1" max="500" step="1" value="160" data-field="tasks">
+                </div>
+                <input aria-label="Monthly task count value" type="number" min="1" max="500" step="1" value="160" data-field="tasks">
+              </div>
+
+              <div class="control">
+                <div>
+                  <label for="minutes-range">Minutes saved per task</label>
+                  <p class="hint">Agent time saved before human review.</p>
+                  <input id="minutes-range" type="range" min="1" max="120" step="1" value="6" data-field="minutes">
+                </div>
+                <input aria-label="Minutes saved per task value" type="number" min="1" max="120" step="1" value="6" data-field="minutes">
+              </div>
+
+              <div class="control">
+                <div>
+                  <label for="hourly-range">Hourly cost</label>
+                  <p class="hint">Loaded cost for the person doing the task.</p>
+                  <input id="hourly-range" type="range" min="10" max="250" step="5" value="45" data-field="hourly">
+                </div>
+                <input aria-label="Hourly cost value" type="number" min="10" max="250" step="5" value="45" data-field="hourly">
+              </div>
+
+              <div class="control">
+                <div>
+                  <label for="overhead-range">Review overhead</label>
+                  <p class="hint">Percent of saved time spent checking the result.</p>
+                  <input id="overhead-range" type="range" min="0" max="80" step="1" value="20" data-field="overhead">
+                </div>
+                <input aria-label="Review overhead value" type="number" min="0" max="80" step="1" value="20" data-field="overhead">
+              </div>
+            </div>
+          </section>
+
+          <aside class="panel results" aria-live="polite" aria-label="Calculated output">
+            <div class="metric">
+              <div class="metric-label">Monthly hours saved</div>
+              <div class="metric-value" id="net-hours">12.8h</div>
+              <div class="metric-sub" id="hours-detail">16.0 gross hours minus 3.2 review hours.</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Monthly net value</div>
+              <div class="metric-value" id="net-value">$576</div>
+              <div class="metric-sub" id="value-detail">Net hours multiplied by hourly cost.</div>
+            </div>
+            <div class="formula" id="formula">Formula: tasks x minutes saved x (1 - review overhead) / 60 x hourly cost.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section trust-grid" aria-labelledby="trust-title">
+        <div>
+          <p class="eyebrow">Trust before speed</p>
+          <h2 id="trust-title">A faster answer is only useful when it leaves evidence.</h2>
+          <p class="quiet">The agent result should make review cheaper, not optional. A reviewer needs to see what went in, what checks ran, what came out, and the final human decision.</p>
+        </div>
+        <ol class="steps">
+          <li><strong>Input</strong> The task request, relevant files, ticket fields, or public source links.</li>
+          <li><strong>Checks run</strong> Commands, comparisons, test results, or inspection steps used to catch mistakes.</li>
+          <li><strong>Result</strong> The summary, patch, classification, or packaged proof the agent produced.</li>
+          <li><strong>Reviewer decision</strong> Approved, revised, rejected, or escalated with a short reason.</li>
+        </ol>
+      </section>
+
+      <section class="section" aria-labelledby="evidence-title">
+        <p class="eyebrow">Evidence needed for this task</p>
+        <h2 id="evidence-title">What the reviewer should ask for.</h2>
+        <ul class="evidence-list" id="evidence-list">
+          <li>A small ticket sample with private details removed.</li>
+          <li>The routing labels or answer categories the agent used.</li>
+          <li>A pass over edge cases where the draft could be wrong.</li>
+          <li>The reviewer decision for each sampled result.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>2026 Steven Chou</div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/proof-chain/">Proof Chain</a>
+        <a href="/projects/">Projects</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var examples = {
+        support: {
+          tasks: 160,
+          minutes: 6,
+          hourly: 45,
+          overhead: 20,
+          evidence: [
+            "A small ticket sample with private details removed.",
+            "The routing labels or answer categories the agent used.",
+            "A pass over edge cases where the draft could be wrong.",
+            "The reviewer decision for each sampled result."
+          ]
+        },
+        qa: {
+          tasks: 80,
+          minutes: 18,
+          hourly: 75,
+          overhead: 25,
+          evidence: [
+            "The release scope, changed files, or feature notes being reviewed.",
+            "The checks run, including test names, commands, or inspection steps.",
+            "A list of high-risk areas the agent flagged and why.",
+            "The reviewer decision on what must be tested manually."
+          ]
+        },
+        proof: {
+          tasks: 24,
+          minutes: 45,
+          hourly: 90,
+          overhead: 30,
+          evidence: [
+            "Public source links that support the claim.",
+            "Sanitized screenshots, command output, or page links.",
+            "The verification step used before publishing.",
+            "The reviewer decision: publish, revise, or keep private."
+          ]
+        }
+      };
+
+      var limits = {
+        tasks: { min: 1, max: 500 },
+        minutes: { min: 1, max: 120 },
+        hourly: { min: 10, max: 250 },
+        overhead: { min: 0, max: 80 }
+      };
+
+      var state = Object.assign({}, examples.support);
+      var money = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      });
+
+      function clamp(field, value) {
+        var numeric = Number(value);
+        if (!Number.isFinite(numeric)) numeric = limits[field].min;
+        return Math.min(limits[field].max, Math.max(limits[field].min, numeric));
+      }
+
+      function setInputs(field, value) {
+        document.querySelectorAll("[data-field='" + field + "']").forEach(function (input) {
+          input.value = value;
+        });
+      }
+
+      function formatHours(value) {
+        return value.toLocaleString("en-US", {
+          minimumFractionDigits: value < 10 ? 1 : 0,
+          maximumFractionDigits: 1
+        });
+      }
+
+      function renderEvidence(items) {
+        var list = document.getElementById("evidence-list");
+        list.innerHTML = "";
+        items.forEach(function (item) {
+          var li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      function render() {
+        var grossHours = state.tasks * state.minutes / 60;
+        var reviewHours = grossHours * state.overhead / 100;
+        var netHours = Math.max(grossHours - reviewHours, 0);
+        var netValue = netHours * state.hourly;
+
+        document.getElementById("net-hours").textContent = formatHours(netHours) + "h";
+        document.getElementById("hours-detail").textContent = formatHours(grossHours) + " gross hours minus " + formatHours(reviewHours) + " review hours.";
+        document.getElementById("net-value").textContent = money.format(netValue);
+        document.getElementById("value-detail").textContent = formatHours(netHours) + " net hours at " + money.format(state.hourly) + " per hour.";
+        document.getElementById("formula").textContent = "Formula: " + state.tasks + " tasks x " + state.minutes + " minutes x " + (100 - state.overhead) + "% after review / 60 x " + money.format(state.hourly) + ".";
+      }
+
+      document.querySelectorAll("[data-field]").forEach(function (input) {
+        input.addEventListener("input", function (event) {
+          var field = event.target.dataset.field;
+          var value = clamp(field, event.target.value);
+          state[field] = value;
+          setInputs(field, value);
+          render();
+        });
+      });
+
+      document.querySelectorAll("[data-example]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var key = button.dataset.example;
+          state = Object.assign({}, examples[key]);
+          Object.keys(limits).forEach(function (field) {
+            setInputs(field, state[field]);
+          });
+          document.querySelectorAll("[data-example]").forEach(function (item) {
+            var active = item === button;
+            item.classList.toggle("active", active);
+            item.setAttribute("aria-selected", String(active));
+          });
+          renderEvidence(state.evidence);
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
