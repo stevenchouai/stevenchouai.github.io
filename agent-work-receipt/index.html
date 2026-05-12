@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Work Receipt - Steven Chou</title>
+  <meta name="description" content="A public checklist for accountable AI workers: objective, inputs, actions, checks, evidence, decision, and next owner.">
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f7f4ee;
+      --surface: #fffdf8;
+      --surface-strong: #ffffff;
+      --foreground: #161719;
+      --muted: #626771;
+      --muted-2: #8a8f98;
+      --border: #ded8ce;
+      --accent: #0052cc;
+      --accent-strong: #003d99;
+      --accent-soft: #e6efff;
+      --green: #176a3a;
+      --green-soft: #e7f4ec;
+      --amber: #8a5a00;
+      --amber-soft: #fff2d4;
+      --red: #9b2c2c;
+      --red-soft: #ffe8e8;
+      --shadow: 0 18px 50px rgba(22, 23, 25, 0.08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(22, 23, 25, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(22, 23, 25, 0.035) 1px, transparent 1px),
+        var(--background);
+      background-size: 48px 48px;
+      color: var(--foreground);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--accent);
+    }
+
+    button,
+    select {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 0.75rem;
+      z-index: 10;
+      transform: translateY(-150%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      padding: 0.55rem 0.75rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--border);
+      background: rgba(247, 244, 238, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header-inner {
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      border-radius: var(--radius);
+      padding: 0.5rem 0.7rem;
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      align-items: end;
+      gap: 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0 0 1rem;
+      color: var(--accent);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 1rem;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions,
+    .receipt-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.9rem;
+      background: var(--surface-strong);
+      color: var(--foreground);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 750;
+      box-shadow: 0 8px 22px rgba(22, 23, 25, 0.06);
+    }
+
+    .button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      background: var(--accent-strong);
+      color: #ffffff;
+    }
+
+    .note-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.86);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .note-row {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .note-row:last-child {
+      border-bottom: 0;
+    }
+
+    .note-key,
+    .note-value {
+      padding: 1rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .note-key {
+      color: var(--muted);
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .note-value {
+      border-left: 1px solid var(--border);
+      color: var(--foreground);
+      font-weight: 650;
+    }
+
+    .section {
+      padding: 44px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      margin-bottom: 0.6rem;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .demo-shell {
+      display: grid;
+      grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .panel,
+    .receipt-panel,
+    .text-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 14px 38px rgba(22, 23, 25, 0.06);
+    }
+
+    .panel {
+      padding: 1rem;
+      position: sticky;
+      top: 84px;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label,
+    .label {
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      color: var(--foreground);
+      padding: 0.6rem 0.7rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .safety-note {
+      margin: 1rem 0 0;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .receipt-panel {
+      overflow: hidden;
+    }
+
+    .receipt-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+      background: var(--surface-strong);
+    }
+
+    .receipt-title {
+      margin-bottom: 0.25rem;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .receipt-subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.45rem;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      padding: 0.3rem 0.55rem;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .chip.low,
+    .chip.checked {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .chip.medium,
+    .chip.drafted {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .chip.high,
+    .chip.review {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .receipt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .receipt-field {
+      min-height: 144px;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem;
+    }
+
+    .receipt-field:nth-child(odd) {
+      border-right: 1px solid var(--border);
+    }
+
+    .receipt-field.wide {
+      grid-column: 1 / -1;
+      min-height: auto;
+    }
+
+    .receipt-field h3 {
+      margin-bottom: 0.55rem;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .receipt-field p,
+    .receipt-field li {
+      color: var(--foreground);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .receipt-field p {
+      margin-bottom: 0;
+    }
+
+    .receipt-field ul {
+      display: grid;
+      gap: 0.4rem;
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .receipt-text {
+      margin: 0;
+      border: 0;
+      border-top: 1px solid var(--border);
+      background: #111418;
+      color: #f4efe6;
+      padding: 1rem;
+      overflow: auto;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .text-panel {
+      padding: 1.25rem;
+    }
+
+    .text-panel p {
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .rule-list {
+      display: grid;
+      gap: 0.7rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .rule-list li {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      padding: 0.85rem;
+      color: var(--foreground);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.94rem;
+    }
+
+    .related {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .related a {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      padding: 1rem;
+      box-shadow: 0 10px 28px rgba(22, 23, 25, 0.05);
+    }
+
+    .related span {
+      display: block;
+      color: var(--accent);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .related strong {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 1.2rem;
+    }
+
+    .related p {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .demo-shell,
+      .why-grid,
+      .related {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        position: static;
+      }
+
+      .receipt-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .receipt-field:nth-child(odd) {
+        border-right: 0;
+      }
+
+      .note-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .receipt-head {
+        flex-direction: column;
+      }
+
+      .chips {
+        justify-content: flex-start;
+      }
+
+      .note-row {
+        grid-template-columns: 1fr;
+      }
+
+      .note-value {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../" aria-label="Steven Chou home">
+        <span class="brand-mark">SC</span>
+        <span>Steven Chou</span>
+      </a>
+      <nav class="nav-links" aria-label="Related pages">
+        <a href="../proof-chain/">Proof</a>
+        <a href="../demo/">Demo</a>
+        <a href="./index.txt">Plaintext</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Public checklist</p>
+          <h1>Agent Work Receipt</h1>
+          <p class="hero-copy">A small receipt format Steven can ask AI workers to leave behind: what changed, what was checked, what evidence exists, and who owns the next move.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#demo">Build a sample receipt</a>
+            <a class="button" href="./index.txt">Read the plaintext export</a>
+          </div>
+        </div>
+
+        <aside class="note-card" aria-label="Receipt boundary notes">
+          <div class="note-row">
+            <div class="note-key">Owner</div>
+            <div class="note-value">Steven-owned public artifact</div>
+          </div>
+          <div class="note-row">
+            <div class="note-key">Data</div>
+            <div class="note-value">Sample-only fields</div>
+          </div>
+          <div class="note-row">
+            <div class="note-key">Boundary</div>
+            <div class="note-value">No private paths, IDs, records, or outside names</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Build a sample receipt</h2>
+          <p>Choose a task shape, risk level, and verification status. The receipt stays synthetic and local to this page.</p>
+        </div>
+
+        <div class="demo-shell">
+          <form class="panel" aria-label="Receipt controls">
+            <div class="field">
+              <label for="task-type">Task type</label>
+              <select id="task-type" name="task-type">
+                <option value="page">Public page update</option>
+                <option value="research">Research synthesis</option>
+                <option value="data">Data cleanup</option>
+                <option value="handoff">Workflow handoff</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="risk-level">Risk level</label>
+              <select id="risk-level" name="risk-level">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="verification-status">Verification status</label>
+              <select id="verification-status" name="verification-status">
+                <option value="checked">Checked</option>
+                <option value="drafted">Drafted</option>
+                <option value="review">Needs human review</option>
+              </select>
+            </div>
+
+            <p class="safety-note">All options are fixed sample data. The page makes no external calls and stores nothing.</p>
+          </form>
+
+          <article class="receipt-panel" aria-live="polite" aria-label="Generated agent work receipt">
+            <div class="receipt-head">
+              <div>
+                <h2 class="receipt-title">Generated receipt</h2>
+                <p class="receipt-subtitle">Public demo format for accountable AI-worker output.</p>
+              </div>
+              <div class="chips" aria-label="Selected receipt tags">
+                <span class="chip" id="task-chip"></span>
+                <span class="chip" id="risk-chip"></span>
+                <span class="chip" id="status-chip"></span>
+              </div>
+            </div>
+
+            <div class="receipt-grid">
+              <section class="receipt-field wide">
+                <h3>Objective</h3>
+                <p id="receipt-objective"></p>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Inputs</h3>
+                <ul id="receipt-inputs"></ul>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Actions</h3>
+                <ul id="receipt-actions"></ul>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Checks</h3>
+                <ul id="receipt-checks"></ul>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Evidence</h3>
+                <ul id="receipt-evidence"></ul>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Decision</h3>
+                <p id="receipt-decision"></p>
+              </section>
+
+              <section class="receipt-field">
+                <h3>Next owner</h3>
+                <p id="receipt-owner"></p>
+              </section>
+            </div>
+
+            <pre class="receipt-text" id="receipt-text" tabindex="0"></pre>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container why-grid">
+        <div class="text-panel">
+          <h2>Why receipts matter</h2>
+          <p>Agent output is cheap to produce and easy to misread. A receipt turns it into something a founder or operator can inspect: the goal, the source boundaries, the work performed, the checks run, the evidence left behind, and the next owner.</p>
+          <p>That makes agent work reusable, auditable, and safer to delegate without exposing sensitive run records or outside identities.</p>
+        </div>
+
+        <div class="text-panel">
+          <h2>Receipt rules</h2>
+          <ul class="rule-list">
+            <li>State the objective in one plain sentence.</li>
+            <li>Name inputs by category, not by private path or private system ID.</li>
+            <li>Separate actions from checks so review is not guesswork.</li>
+            <li>Leave evidence that can be inspected without exposing sensitive run records.</li>
+            <li>End with a decision and a next owner.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Related public proof</h2>
+          <p>This demo pairs with Steven's existing public proof pages.</p>
+        </div>
+        <div class="related">
+          <a href="../proof-chain/">
+            <span>Proof chain</span>
+            <strong>See the public audit trail</strong>
+            <p>How Steven presents work as linked evidence instead of loose claims.</p>
+          </a>
+          <a href="../demo/">
+            <span>Portfolio demo</span>
+            <strong>Walk the broader site demo</strong>
+            <p>A guided entry point for the public artifacts already on the site.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">Agent Work Receipt is a Steven-owned public demo using sample data only.</div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var taskData = {
+        page: {
+          label: "Public page update",
+          objective: "Publish a privacy-safe explainer page for a public workflow artifact.",
+          inputs: [
+            "Public site tone",
+            "Receipt field schema",
+            "Static-page constraints"
+          ],
+          actions: [
+            "Drafted concise page copy",
+            "Built a self-contained interactive preview",
+            "Prepared a crawler-friendly plaintext export"
+          ],
+          evidence: [
+            "Static HTML page path",
+            "Plaintext export path",
+            "Sitemap entry for the public URL"
+          ]
+        },
+        research: {
+          label: "Research synthesis",
+          objective: "Convert a bounded research brief into a decision-ready summary.",
+          inputs: [
+            "Topic brief",
+            "Approved public sources",
+            "Review criteria"
+          ],
+          actions: [
+            "Grouped findings by decision impact",
+            "Separated facts from interpretation",
+            "Removed unsupported claims"
+          ],
+          evidence: [
+            "Source list with public links",
+            "Finding table",
+            "Open questions section"
+          ]
+        },
+        data: {
+          label: "Data cleanup",
+          objective: "Normalize a sample dataset so a reviewer can compare records safely.",
+          inputs: [
+            "Synthetic CSV sample",
+            "Column rules",
+            "Expected output shape"
+          ],
+          actions: [
+            "Standardized labels",
+            "Flagged missing values",
+            "Generated a small review summary"
+          ],
+          evidence: [
+            "Clean sample output",
+            "Validation count summary",
+            "Rows flagged for review"
+          ]
+        },
+        handoff: {
+          label: "Workflow handoff",
+          objective: "Package a repeatable workflow so the next operator can continue it.",
+          inputs: [
+            "Goal statement",
+            "Allowed tool list",
+            "Done criteria"
+          ],
+          actions: [
+            "Mapped the workflow steps",
+            "Recorded assumptions",
+            "Marked unresolved decisions"
+          ],
+          evidence: [
+            "Handoff checklist",
+            "Decision log excerpt",
+            "Follow-up task list"
+          ]
+        }
+      };
+
+      var riskData = {
+        low: {
+          label: "Low risk",
+          className: "low",
+          checks: [
+            "Checked copy for private identifiers",
+            "Confirmed links stay within public pages"
+          ],
+          decisionPrefix: "Ready to publish as a sample artifact.",
+          owner: "Public site owner"
+        },
+        medium: {
+          label: "Medium risk",
+          className: "medium",
+          checks: [
+            "Checked source boundaries",
+            "Reviewed assumptions against the brief",
+            "Marked anything that needs operator judgment"
+          ],
+          decisionPrefix: "Usable after one operator pass.",
+          owner: "Operator reviewer"
+        },
+        high: {
+          label: "High risk",
+          className: "high",
+          checks: [
+            "Checked for private data exposure",
+            "Separated facts from recommendations",
+            "Escalated unresolved decisions"
+          ],
+          decisionPrefix: "Hold for explicit human approval.",
+          owner: "Founder or accountable delegate"
+        }
+      };
+
+      var statusData = {
+        checked: {
+          label: "Checked",
+          className: "checked",
+          checks: [
+            "Verification status recorded as checked"
+          ],
+          decisionSuffix: "No blocker remains in the sample receipt."
+        },
+        drafted: {
+          label: "Drafted",
+          className: "drafted",
+          checks: [
+            "Draft status recorded",
+            "Review gap noted before reuse"
+          ],
+          decisionSuffix: "Treat this as a draft until a reviewer signs off."
+        },
+        review: {
+          label: "Needs human review",
+          className: "review",
+          checks: [
+            "Human review required",
+            "Decision authority not delegated to the agent"
+          ],
+          decisionSuffix: "Do not ship until the next owner approves."
+        }
+      };
+
+      var fields = {
+        task: document.getElementById("task-type"),
+        risk: document.getElementById("risk-level"),
+        status: document.getElementById("verification-status"),
+        taskChip: document.getElementById("task-chip"),
+        riskChip: document.getElementById("risk-chip"),
+        statusChip: document.getElementById("status-chip"),
+        objective: document.getElementById("receipt-objective"),
+        inputs: document.getElementById("receipt-inputs"),
+        actions: document.getElementById("receipt-actions"),
+        checks: document.getElementById("receipt-checks"),
+        evidence: document.getElementById("receipt-evidence"),
+        decision: document.getElementById("receipt-decision"),
+        owner: document.getElementById("receipt-owner"),
+        text: document.getElementById("receipt-text")
+      };
+
+      function appendItems(listElement, items) {
+        var fragment = document.createDocumentFragment();
+        items.forEach(function (item) {
+          var li = document.createElement("li");
+          li.textContent = item;
+          fragment.appendChild(li);
+        });
+        listElement.replaceChildren(fragment);
+      }
+
+      function setChip(element, label, className) {
+        element.textContent = label;
+        element.className = "chip " + className;
+      }
+
+      function formatLines(label, items) {
+        return label + ":\n" + items.map(function (item) {
+          return "- " + item;
+        }).join("\n");
+      }
+
+      function buildReceipt() {
+        var task = taskData[fields.task.value] || taskData.page;
+        var risk = riskData[fields.risk.value] || riskData.low;
+        var status = statusData[fields.status.value] || statusData.checked;
+        var checks = task.actions.length > 0 ? risk.checks.concat(status.checks) : status.checks;
+        var decision = risk.decisionPrefix + " " + status.decisionSuffix;
+
+        return {
+          task: task,
+          risk: risk,
+          status: status,
+          objective: task.objective,
+          inputs: task.inputs,
+          actions: task.actions,
+          checks: checks,
+          evidence: task.evidence,
+          decision: decision,
+          owner: risk.owner
+        };
+      }
+
+      function renderReceipt() {
+        var receipt = buildReceipt();
+
+        setChip(fields.taskChip, receipt.task.label, "");
+        setChip(fields.riskChip, receipt.risk.label, receipt.risk.className);
+        setChip(fields.statusChip, receipt.status.label, receipt.status.className);
+
+        fields.objective.textContent = receipt.objective;
+        appendItems(fields.inputs, receipt.inputs);
+        appendItems(fields.actions, receipt.actions);
+        appendItems(fields.checks, receipt.checks);
+        appendItems(fields.evidence, receipt.evidence);
+        fields.decision.textContent = receipt.decision;
+        fields.owner.textContent = receipt.owner;
+        fields.text.textContent = [
+          "Agent Work Receipt",
+          "",
+          "Objective: " + receipt.objective,
+          "",
+          formatLines("Inputs", receipt.inputs),
+          "",
+          formatLines("Actions", receipt.actions),
+          "",
+          formatLines("Checks", receipt.checks),
+          "",
+          formatLines("Evidence", receipt.evidence),
+          "",
+          "Decision: " + receipt.decision,
+          "Next owner: " + receipt.owner
+        ].join("\n");
+      }
+
+      fields.task.addEventListener("change", renderReceipt);
+      fields.risk.addEventListener("change", renderReceipt);
+      fields.status.addEventListener("change", renderReceipt);
+      renderReceipt();
+    }());
+  </script>
+</body>
+</html>

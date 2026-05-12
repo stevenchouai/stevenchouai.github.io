@@ -1,0 +1,53 @@
+Agent Work Receipt
+Steven Chou public demo
+URL: https://stevenchouai.github.io/agent-work-receipt
+
+Purpose
+Agent Work Receipt is a public checklist for accountable AI workers. It shows the receipt format Steven can ask an agent to leave behind after work is performed, without exposing sensitive run records, private paths, private IDs, or outside identities.
+
+Receipt fields
+Objective: What the agent was trying to accomplish.
+Inputs: The approved source categories used for the work.
+Actions: What the agent changed, drafted, cleaned, or prepared.
+Checks: What the agent verified before handing off.
+Evidence: Public or synthetic artifacts a reviewer can inspect.
+Decision: Whether the work is ready, blocked, or waiting for approval.
+Next owner: The person or role accountable for the next move.
+
+Why receipts matter
+Agent output is cheap to produce and easy to misread. A receipt turns it into something a founder or operator can inspect: the goal, the source boundaries, the work performed, the checks run, the evidence left behind, and the next owner.
+
+That makes agent work reusable, auditable, and safer to delegate without exposing sensitive run records or outside identities.
+
+Sample receipt
+Objective: Publish a privacy-safe explainer page for a public workflow artifact.
+
+Inputs:
+- Public site tone
+- Receipt field schema
+- Static-page constraints
+
+Actions:
+- Drafted concise page copy
+- Built a self-contained interactive preview
+- Prepared a crawler-friendly plaintext export
+
+Checks:
+- Checked copy for private identifiers
+- Confirmed links stay within public pages
+- Verification status recorded as checked
+
+Evidence:
+- Static HTML page path
+- Plaintext export path
+- Sitemap entry for the public URL
+
+Decision: Ready to publish as a sample artifact. No blocker remains in the sample receipt.
+Next owner: Public site owner
+
+Safety boundary
+This demo uses sample data only. It does not include real private paths, private system IDs, sensitive run records, workplace details, or names outside Steven.
+
+Related pages
+Proof chain: https://stevenchouai.github.io/proof-chain/
+Demo: https://stevenchouai.github.io/demo/
