@@ -1,0 +1,31 @@
+Builder radar: Guo Yu
+
+A public reading card on Guo Yu and the builder lessons Steven Chou is taking into his own next experiments.
+
+External links:
+- GitHub profile: https://github.com/guo-yu
+- Public website listed from GitHub profile: https://vibelab.live/guoyu
+- Public writing: https://paragraph.com/@guoyu
+
+Public facts used:
+- Public positioning describes Guo Yu as an ex-senior principal engineer at ByteDance and retired.
+- Public snippets place him around Tokyo, Azumino, and Miyakojima.
+- Public snippets identify him as founder of ChecksFinance/chekusu and CodeforDAO.
+- The main public surfaces are GitHub, a personal website, and Paragraph writing.
+
+Who Guo Yu is, from the public surface:
+Guo Yu reads as an independent builder with deep engineering range, a public habit of writing, and a visible Japan/Asia network. The useful signal for Steven is not celebrity. It is the way the public surface connects code, products, place, and taste without needing a long resume pitch.
+
+Why this matters to Steven:
+- Independent builder taste: make choices visible, including what is worth building, what is worth writing, and what is worth ignoring.
+- Public shipping cadence: show multiple signs of motion, not one perfect launch.
+- Productized personal curiosity: turn personal interests into products, repos, writing, and small systems other people can inspect.
+- Japan/Asia builder network: show how Steven learns from Asia-based builders without pretending to be inside their private life.
+
+What Steven should copy this week:
+1. Public demo: add one 90-second demo to the existing demo surface, "Builder radar to shipped page." Show the source links, the static page, and the before/after diff in one simple walkthrough.
+2. Writing note: publish a short note titled "What I copied from Guo Yu this week." Keep it under 700 words: one observation, one experiment, one result, and one thing Steven will repeat.
+3. Repo proof surface: add a small "Builder radar" row to the Proof Chain or the relevant public repo README with the page URL, source links, and one commit link. Make the learning trace visible.
+
+Boundary note:
+This page is a public reading card, not an endorsement and not private or personal data. It only summarizes the public surfaces and public positioning listed in the source brief.

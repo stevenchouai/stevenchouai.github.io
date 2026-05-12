@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Builder radar: Guo Yu</title>
+  <meta name="description" content="A public reading card on Guo Yu and the builder lessons Steven Chou is taking into his own next experiments.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #171512;
+      --muted: #59665f;
+      --soft: #edf4ef;
+      --paper: #fbfcf8;
+      --line: #cbd8cf;
+      --accent: #0d6f6a;
+      --accent-2: #bf4b2f;
+      --shadow: rgba(20, 38, 34, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(13, 111, 106, 0.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(191, 75, 47, 0.05) 1px, transparent 1px),
+        var(--paper);
+      background-size: 44px 44px;
+      color: var(--ink);
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration-color: rgba(13, 111, 106, 0.35);
+      text-underline-offset: 0.2em;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: #074f4c;
+      text-decoration-color: currentColor;
+    }
+
+    .shell {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-decoration: none;
+    }
+
+    .back:hover,
+    .back:focus-visible {
+      color: var(--ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.75fr);
+      gap: 28px;
+      align-items: stretch;
+      min-height: 420px;
+    }
+
+    .hero-main,
+    .panel,
+    .note {
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 242, 0.92);
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 58px);
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 9px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--accent-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 9vw, 7.6rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 0.9;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin-bottom: 26px;
+      color: #39332c;
+      font-size: clamp(1.02rem, 1.7vw, 1.3rem);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 680px;
+      margin-top: 30px;
+    }
+
+    .tag {
+      min-height: 74px;
+      border: 1px solid rgba(203, 216, 207, 0.95);
+      background: var(--soft);
+      padding: 13px 14px;
+    }
+
+    .tag span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tag strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.96rem;
+      line-height: 1.3;
+    }
+
+    .side-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid var(--ink);
+      background: #171512;
+      color: #fff8eb;
+      box-shadow: 0 24px 70px rgba(23, 21, 18, 0.2);
+    }
+
+    .side-card h2 {
+      margin-bottom: 16px;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .side-card p {
+      color: #d8cdbb;
+      font-size: 0.96rem;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .link-list a {
+      display: block;
+      border: 1px solid rgba(255, 248, 235, 0.24);
+      padding: 13px 14px;
+      color: #fff8eb;
+      text-decoration: none;
+    }
+
+    .link-list span {
+      display: block;
+      margin-top: 4px;
+      color: #bcb0a0;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, 0.46fr);
+      gap: 24px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .panel,
+    .note {
+      padding: clamp(22px, 4vw, 34px);
+    }
+
+    .panel h2,
+    .note h2 {
+      margin-bottom: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.05;
+    }
+
+    .panel p,
+    .panel li,
+    .note p,
+    .note li {
+      color: #3f3931;
+      font-size: 1rem;
+    }
+
+    .panel ul,
+    .note ul,
+    .actions {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullets {
+      display: grid;
+      gap: 13px;
+    }
+
+    .bullets li,
+    .actions li {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .bullets li::before,
+    .actions li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 11px;
+      height: 11px;
+      border: 2px solid var(--accent);
+      background: var(--paper);
+    }
+
+    .actions {
+      display: grid;
+      gap: 18px;
+      counter-reset: action;
+    }
+
+    .actions li {
+      counter-increment: action;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .actions li::before {
+      content: counter(action);
+      top: 19px;
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .actions strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .note {
+      position: sticky;
+      top: 22px;
+      background: #ecf4ee;
+      box-shadow: none;
+    }
+
+    .note h2 {
+      font-size: 1.55rem;
+    }
+
+    .note p {
+      color: #2f463f;
+      font-size: 0.95rem;
+    }
+
+    .footer-note {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .content,
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-card {
+        min-height: auto;
+      }
+
+      .note {
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .shell {
+        width: min(100vw - 22px, 1120px);
+        padding-top: 18px;
+      }
+
+      .hero-main,
+      .panel,
+      .note,
+      .side-card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 18vw, 4.6rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="back" href="/">Steven Chou / builder radar</a>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-main">
+        <p class="eyebrow">Public reading card</p>
+        <h1 id="page-title">Builder radar: Guo Yu</h1>
+        <p class="lead">A compact read on Guo Yu's public builder surface, and the specific habits Steven should turn into experiments this week.</p>
+
+        <div class="meta-grid" aria-label="Public facts">
+          <div class="tag">
+            <span>Public positioning</span>
+            <strong>Ex-senior principal engineer at ByteDance; retired. Source: public GitHub/profile snippets.</strong>
+          </div>
+          <div class="tag">
+            <span>Builder frame</span>
+            <strong>Founder of ChecksFinance/chekusu and CodeforDAO. Source: public profile snippets.</strong>
+          </div>
+          <div class="tag">
+            <span>Public places</span>
+            <strong>Tokyo, Azumino, and Miyakojima appear in public profile snippets.</strong>
+          </div>
+          <div class="tag">
+            <span>Main surfaces</span>
+            <strong>GitHub, personal site, and Paragraph writing.</strong>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-card" aria-label="External links">
+        <div>
+          <h2>External links</h2>
+          <p>These are the public surfaces used for this card. No private notes or long copied passages are included.</p>
+        </div>
+        <ul class="link-list">
+          <li>
+            <a href="https://github.com/guo-yu" target="_blank" rel="noopener noreferrer">GitHub profile <span>Public code and profile links</span></a>
+          </li>
+          <li>
+            <a href="https://vibelab.live/guoyu" target="_blank" rel="noopener noreferrer">Public website <span>Website linked from the GitHub profile</span></a>
+          </li>
+          <li>
+            <a href="https://paragraph.com/@guoyu" target="_blank" rel="noopener noreferrer">Public writing <span>Paragraph writing surface</span></a>
+          </li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="content">
+      <div class="stack">
+        <section class="panel">
+          <h2>Who Guo Yu is, from the public surface</h2>
+          <p>Guo Yu reads as an independent builder with deep engineering range, a public habit of writing, and a visible Japan/Asia network. The useful signal for Steven is not celebrity. It is the way the public surface connects code, products, place, and taste without needing a long resume pitch.</p>
+          <ul class="bullets">
+            <li>GitHub gives the builder trail: code, profile links, and visible projects.</li>
+            <li>The personal site gives a clearer doorway than a scattered set of links.</li>
+            <li>Paragraph gives the writing layer, so the work has a voice and a point of view.</li>
+            <li>The public snippets frame him as retired from a senior ByteDance role and building through ChecksFinance/chekusu and CodeforDAO.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Why this matters to Steven</h2>
+          <ul class="bullets">
+            <li><strong>Independent builder taste.</strong> The lesson is to make choices visible: what is worth building, what is worth writing, and what is worth ignoring.</li>
+            <li><strong>Public shipping cadence.</strong> The public surface works because there are multiple signs of motion, not one perfect launch.</li>
+            <li><strong>Productized personal curiosity.</strong> Personal interests become products, repos, writing, and small systems that other people can inspect.</li>
+            <li><strong>Japan/Asia builder network.</strong> Place is part of the signal. Steven can show how he learns from Asia-based builders without pretending to be inside their private life.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>What Steven should copy this week</h2>
+          <ol class="actions">
+            <li>
+              <strong>Public demo.</strong>
+              Add one 90-second demo to the existing demo surface: "Builder radar to shipped page." Show the source links, the static page, and the before/after diff in one simple walkthrough.
+            </li>
+            <li>
+              <strong>Writing note.</strong>
+              Publish a short note titled "What I copied from Guo Yu this week." Keep it under 700 words: one observation, one experiment, one result, and one thing Steven will repeat.
+            </li>
+            <li>
+              <strong>Repo proof surface.</strong>
+              Add a small "Builder radar" row to the Proof Chain or the relevant public repo README with the page URL, source links, and one commit link. Make the learning trace visible.
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <aside class="note">
+        <h2>Boundary note</h2>
+        <p>This page is a public reading card, not an endorsement and not private or personal data. It only summarizes the public surfaces and public positioning listed in the source brief.</p>
+        <p class="footer-note">The goal is simple: show how Steven studies real builders, extracts a few useful habits, and turns them into concrete next steps.</p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
