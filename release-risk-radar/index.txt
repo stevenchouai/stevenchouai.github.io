@@ -1,0 +1,38 @@
+Release Risk Radar
+Steven Chou public demo
+URL: https://stevenchouai.github.io/release-risk-radar/
+
+Purpose
+Release Risk Radar is a small public demo for AI-native QA release ownership. It turns three sample-safe release signals into a risk tier, decision, evidence checklist, and next owner.
+
+Inputs
+Change size:
+- Small copy or config change
+- Medium workflow change
+- Large behavior or integration change
+
+Test signal:
+- Relevant checks are green
+- Checks are mixed or partial
+- A relevant check failed
+
+Rollback readiness:
+- Rollback path is ready
+- Rollback needs operator steps
+- Rollback path is unclear
+
+Outputs
+Risk tier: Low, medium, or high.
+Decision: Ship after a quick owner pass, hold for one focused review, or do not ship until the blocker is explained.
+Evidence checklist: Changed file list, static preview, relevant test output, before/after behavior note, architecture note, or fallback plan depending on the selected scenario.
+Next owner: Release owner, operator reviewer, or founder/accountable delegate.
+
+Why this matters
+Agent work can make release changes faster, but speed is not the same as release judgment. A release decision needs a receipt: what changed, which checks matter, what risk remains, and who owns the next move.
+
+Privacy boundary
+This demo uses synthetic examples only. It does not include real release records, private logs, internal tickets, employer systems, end-user data, private vault paths, credentials, or named third-party learning-card content.
+
+Related pages
+Proof chain: https://stevenchouai.github.io/proof-chain/
+Demo: https://stevenchouai.github.io/demo/

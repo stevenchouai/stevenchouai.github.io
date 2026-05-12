@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Release Risk Radar - Steven Chou</title>
+  <meta name="description" content="A small public demo that turns release signals into a risk tier, evidence checklist, decision, and next owner.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ee;
+      --card: #fffdf8;
+      --ink: #171717;
+      --muted: #5f6670;
+      --border: #ded8ce;
+      --blue: #0052cc;
+      --green: #176a3a;
+      --amber: #8a5a00;
+      --red: #9b2c2c;
+      --soft-blue: #e9f1ff;
+      --soft-green: #e7f4ec;
+      --soft-amber: #fff2d4;
+      --soft-red: #ffe8e8;
+      --shadow: 0 18px 48px rgba(23, 23, 23, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(23,23,23,.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(23,23,23,.035) 1px, transparent 1px),
+        var(--bg);
+      background-size: 44px 44px;
+      color: var(--ink);
+      font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover, a:focus-visible { color: var(--blue); }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--border);
+      background: rgba(247,244,238,.93);
+      backdrop-filter: blur(12px);
+    }
+    .nav { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font: 750 1rem/1 ui-sans-serif, system-ui, sans-serif; }
+    .links { display: flex; gap: .8rem; flex-wrap: wrap; font: 650 .88rem/1 ui-sans-serif, system-ui, sans-serif; color: var(--muted); }
+    main { padding-bottom: 64px; }
+    .hero { padding: 80px 0 40px; }
+    .eyebrow { margin: 0 0 12px; color: var(--blue); font: 800 .78rem/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2.35rem, 7vw, 5.9rem); line-height: .95; letter-spacing: -.055em; }
+    .lead { max-width: 720px; margin: 24px 0 0; color: var(--muted); font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .grid { display: grid; grid-template-columns: .86fr 1.14fr; gap: 24px; align-items: start; }
+    .panel, .result, .text-card {
+      border: 1px solid var(--border);
+      background: rgba(255,253,248,.9);
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+    }
+    .panel { padding: 24px; }
+    .panel h2, .result h2, .text-card h2 { margin: 0 0 12px; font-size: 1.35rem; letter-spacing: -.025em; }
+    .field { margin-top: 18px; }
+    label { display: block; margin-bottom: 8px; font: 760 .78rem/1 ui-sans-serif, system-ui, sans-serif; color: var(--muted); letter-spacing: .09em; text-transform: uppercase; }
+    select { width: 100%; border: 1px solid var(--border); border-radius: 12px; background: white; color: var(--ink); padding: 12px; font: 650 1rem/1.2 ui-sans-serif, system-ui, sans-serif; }
+    .note { margin: 18px 0 0; color: var(--muted); font: .92rem/1.45 ui-sans-serif, system-ui, sans-serif; }
+    .result { overflow: hidden; }
+    .result-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding: 24px; border-bottom: 1px solid var(--border); }
+    .tier { display: inline-flex; align-items: center; border-radius: 999px; padding: 8px 12px; font: 800 .78rem/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .tier.low { color: var(--green); background: var(--soft-green); }
+    .tier.medium { color: var(--amber); background: var(--soft-amber); }
+    .tier.high { color: var(--red); background: var(--soft-red); }
+    .decision { margin: 8px 0 0; font-size: clamp(1.4rem, 2.6vw, 2.2rem); line-height: 1.1; letter-spacing: -.035em; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .cell { min-height: 190px; padding: 22px; border-bottom: 1px solid var(--border); }
+    .cell:nth-child(odd) { border-right: 1px solid var(--border); }
+    .cell h3 { margin: 0 0 10px; font: 800 .78rem/1 ui-sans-serif, system-ui, sans-serif; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    ul { margin: 0; padding-left: 1.15rem; }
+    li + li { margin-top: 7px; }
+    .owner { margin: 0; font-weight: 750; }
+    .receipt { margin: 0; padding: 22px; white-space: pre-wrap; overflow: auto; background: #151515; color: #f8f3e8; font: .88rem/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .section { padding: 34px 0; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .text-card { padding: 22px; box-shadow: none; }
+    .text-card p { margin: 0; color: var(--muted); }
+    .related { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .related a { display: block; border: 1px solid var(--border); border-radius: 16px; background: white; padding: 20px; }
+    .related strong { display: block; margin-bottom: 6px; font-size: 1.1rem; }
+    .related span { display: block; margin-bottom: 8px; color: var(--blue); font: 800 .75rem/1 ui-sans-serif, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--muted); font: .9rem/1.4 ui-sans-serif, system-ui, sans-serif; }
+    @media (max-width: 850px) { .grid, .cards, .related, .result-grid { grid-template-columns: 1fr; } .cell:nth-child(odd) { border-right: 0; } .hero { padding-top: 54px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="../">Steven Chou</a>
+      <nav class="links" aria-label="Site links">
+        <a href="../proof-chain/">Proof chain</a>
+        <a href="../demo/">Demo</a>
+        <a href="../resume/">Resume</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">AI-native QA control plane</p>
+        <h1>Release risk should leave a receipt.</h1>
+        <p class="lead">This public demo turns three safe release signals into a risk tier, evidence checklist, decision, and next owner. No private logs. No internal project names. Just the shape of the operating loop.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid">
+        <form class="panel" id="radar-form">
+          <h2>Try the radar</h2>
+          <p class="note">Pick a sample scenario. The output changes locally in your browser and never leaves the page.</p>
+
+          <div class="field">
+            <label for="change-size">Change size</label>
+            <select id="change-size" name="change-size">
+              <option value="small">Small copy or config change</option>
+              <option value="medium">Medium workflow change</option>
+              <option value="large">Large behavior or integration change</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="test-signal">Test signal</label>
+            <select id="test-signal" name="test-signal">
+              <option value="green">Relevant checks are green</option>
+              <option value="mixed">Checks are mixed or partial</option>
+              <option value="red">A relevant check failed</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="rollback">Rollback readiness</label>
+            <select id="rollback" name="rollback">
+              <option value="ready">Rollback path is ready</option>
+              <option value="manual">Rollback needs operator steps</option>
+              <option value="unclear">Rollback path is unclear</option>
+            </select>
+          </div>
+
+          <p class="note">The point is not to replace judgment. The point is to make judgment inspectable before a release goes out.</p>
+        </form>
+
+        <article class="result" aria-live="polite" aria-label="Release risk decision receipt">
+          <div class="result-head">
+            <div>
+              <h2>Decision receipt</h2>
+              <p class="decision" id="decision-text"></p>
+            </div>
+            <span class="tier" id="risk-tier"></span>
+          </div>
+
+          <div class="result-grid">
+            <section class="cell">
+              <h3>Evidence to inspect</h3>
+              <ul id="evidence-list"></ul>
+            </section>
+            <section class="cell">
+              <h3>Release checks</h3>
+              <ul id="checks-list"></ul>
+            </section>
+            <section class="cell">
+              <h3>Open risk</h3>
+              <ul id="risk-list"></ul>
+            </section>
+            <section class="cell">
+              <h3>Next owner</h3>
+              <p class="owner" id="owner-text"></p>
+            </section>
+          </div>
+          <pre class="receipt" id="receipt-text" tabindex="0"></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap cards">
+        <article class="text-card">
+          <h2>What it shows</h2>
+          <p>Steven can convert QA release judgment into a small, repeatable control-plane artifact: inputs, checks, decision, owner.</p>
+        </article>
+        <article class="text-card">
+          <h2>What it avoids</h2>
+          <p>The demo uses synthetic scenarios only. It does not expose private release records, employer systems, tickets, logs, or end-user data.</p>
+        </article>
+        <article class="text-card">
+          <h2>Why it matters</h2>
+          <p>Agents can draft and test, but releases still need accountable judgment. This is the receipt a human can review.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap related">
+        <a href="../proof-chain/">
+          <span>Proof chain</span>
+          <strong>See the public audit trail</strong>
+          <p>How Steven links claims to visible projects and artifacts.</p>
+        </a>
+        <a href="../demo/">
+          <span>Demo</span>
+          <strong>Walk the broader portfolio demo</strong>
+          <p>The wider operating loop behind this release-risk artifact.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Release Risk Radar is a Steven-owned public demo using sample data only.</div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var changeData = {
+        small: {
+          label: "Small change",
+          score: 0,
+          evidence: ["Changed file list", "Static preview or screenshot", "Link check for affected route"],
+          risks: ["Low blast radius if the changed surface is isolated"]
+        },
+        medium: {
+          label: "Medium change",
+          score: 1,
+          evidence: ["Changed file list", "Relevant test output", "Before and after behavior note"],
+          risks: ["Workflow behavior changed enough to need a second look"]
+        },
+        large: {
+          label: "Large change",
+          score: 2,
+          evidence: ["Architecture note", "Full relevant test output", "Explicit fallback plan"],
+          risks: ["Large behavior surface increases regression and rollback risk"]
+        }
+      };
+
+      var testData = {
+        green: { label: "Green checks", score: 0, checks: ["Relevant tests pass", "No new lint or parser errors", "Smoke path verified"] },
+        mixed: { label: "Mixed checks", score: 1, checks: ["Separate unrelated failures from release blockers", "List any skipped checks", "Run one manual smoke path"] },
+        red: { label: "Failed check", score: 2, checks: ["Read the failing log", "Fix or explicitly defer the failure", "Do not ship on a mystery red"] }
+      };
+
+      var rollbackData = {
+        ready: { label: "Rollback ready", score: 0, owner: "Release owner can publish after final review." },
+        manual: { label: "Manual rollback", score: 1, owner: "Operator reviewer should confirm rollback steps before release." },
+        unclear: { label: "Rollback unclear", score: 2, owner: "Founder or accountable delegate must approve before release." }
+      };
+
+      var tierData = [
+        { max: 1, key: "low", label: "Low risk", decision: "Ship after a quick owner pass." },
+        { max: 3, key: "medium", label: "Medium risk", decision: "Hold for one focused review." },
+        { max: 6, key: "high", label: "High risk", decision: "Do not ship until the blocker is explained." }
+      ];
+
+      var fields = {
+        change: document.getElementById("change-size"),
+        test: document.getElementById("test-signal"),
+        rollback: document.getElementById("rollback"),
+        tier: document.getElementById("risk-tier"),
+        decision: document.getElementById("decision-text"),
+        evidence: document.getElementById("evidence-list"),
+        checks: document.getElementById("checks-list"),
+        risks: document.getElementById("risk-list"),
+        owner: document.getElementById("owner-text"),
+        receipt: document.getElementById("receipt-text")
+      };
+
+      function appendItems(target, items) {
+        var fragment = document.createDocumentFragment();
+        items.forEach(function (item) {
+          var li = document.createElement("li");
+          li.textContent = item;
+          fragment.appendChild(li);
+        });
+        target.replaceChildren(fragment);
+      }
+
+      function tierFor(score) {
+        return tierData.find(function (tier) { return score <= tier.max; }) || tierData[2];
+      }
+
+      function render() {
+        var change = changeData[fields.change.value] || changeData.small;
+        var test = testData[fields.test.value] || testData.green;
+        var rollback = rollbackData[fields.rollback.value] || rollbackData.ready;
+        var score = change.score + test.score + rollback.score;
+        var tier = tierFor(score);
+        var openRisks = change.risks.concat([
+          test.label === "Green checks" ? "No test blocker in the sample scenario" : test.label,
+          rollback.label
+        ]);
+
+        fields.tier.textContent = tier.label;
+        fields.tier.className = "tier " + tier.key;
+        fields.decision.textContent = tier.decision;
+        appendItems(fields.evidence, change.evidence);
+        appendItems(fields.checks, test.checks);
+        appendItems(fields.risks, openRisks);
+        fields.owner.textContent = rollback.owner;
+        fields.receipt.textContent = [
+          "Release Risk Radar",
+          "",
+          "Inputs:",
+          "- Change size: " + change.label,
+          "- Test signal: " + test.label,
+          "- Rollback readiness: " + rollback.label,
+          "",
+          "Risk tier: " + tier.label,
+          "Decision: " + tier.decision,
+          "Next owner: " + rollback.owner,
+          "",
+          "Evidence to inspect:",
+          change.evidence.map(function (item) { return "- " + item; }).join("\n"),
+          "",
+          "Checks:",
+          test.checks.map(function (item) { return "- " + item; }).join("\n")
+        ].join("\n");
+      }
+
+      fields.change.addEventListener("change", render);
+      fields.test.addEventListener("change", render);
+      fields.rollback.addEventListener("change", render);
+      render();
+    }());
+  </script>
+</body>
+</html>
