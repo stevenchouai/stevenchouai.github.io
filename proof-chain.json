@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Steven Chou public proof chain",
+  "updated": "2026-05-03",
+  "site": "https://stevenchouai.github.io/",
+  "description": "Machine-readable index of Steven Chou's claim-to-artifact proof surfaces for recruiters, collaborators, and AI readers.",
+  "readOrder": [
+    "https://stevenchouai.github.io/proof-chain",
+    "https://stevenchouai.github.io/experience",
+    "https://stevenchouai.github.io/digital-twin",
+    "https://stevenchouai.github.io/blog"
+  ],
+  "artifacts": [
+    {
+      "category": "production-quality-systems",
+      "title": "Business security and release control at e-commerce scale",
+      "claim": "Owned quality strategy for high-traffic anti-crawler, frontend security, circuit breaker, and degradation surfaces while maintaining zero P0/P1 incidents across owned production areas.",
+      "url": "https://stevenchouai.github.io/experience",
+      "evidence": ["0 P0/P1 incidents", "API + Web UI automation", "Release control loops"]
+    },
+    {
+      "category": "public-operating-system",
+      "title": "Digital Twin as a file-first engineering workflow",
+      "claim": "Turned an Obsidian knowledge base, Codex skills, and repo-local rules into a durable loop that writes, audits, and improves public software assets.",
+      "url": "https://stevenchouai.github.io/digital-twin",
+      "evidence": ["On-site explainer", "Wiki-centered memory", "Autonomous upgrade cadence"]
+    },
+    {
+      "category": "reverse-engineering",
+      "title": "Claude Code Sourcemap deep dive",
+      "claim": "Recovered and studied 1,884 Claude Code source files, then packaged the architecture into a bilingual public tutorial and long-form technical essay.",
+      "url": "https://stevenchouai.github.io/blog/claude-code-source-deep-dive",
+      "evidence": ["1,884 files analyzed", "8 tutorial chapters", "Chinese / English"]
+    },
+    {
+      "category": "infrastructure-utility",
+      "title": "CLIProxyAPI for coding-tool provider routing",
+      "claim": "Built a Go proxy server that exposes OpenAI/Gemini/Claude/Codex-compatible APIs with OAuth login, provider routing, and multi-account load balancing.",
+      "url": "https://github.com/stevenchouai/CLIProxyAPI",
+      "evidence": ["Go + Gin", "OAuth support", "Multi-provider routing"]
+    },
+    {
+      "category": "research-proof",
+      "title": "First-author IEEE paper",
+      "claim": "Published research on self-supervised few-shot semantic segmentation, reducing model parameters by 87% while preserving the core learning objective.",
+      "url": "https://ieeexplore.ieee.org/document/10140748",
+      "evidence": ["First author", "87% parameter reduction", "ICCECT 2023"]
+    },
+    {
+      "category": "publishing-system",
+      "title": "Personal website as a proof-chain control layer",
+      "claim": "Maintains a Next.js + MDX public site with search, RSS, structured metadata, static GitHub Pages deployment, and an Obsidian-to-site publishing path.",
+      "url": "https://github.com/stevenchouai/personalWebsite",
+      "evidence": ["Next.js 16", "MDX + RSS + sitemap", "Obsidian sync scripts"]
+    }
+  ]
+}
