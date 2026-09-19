@@ -1,0 +1,14 @@
+<svg width="1600" height="800" viewBox="0 0 1600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="800" fill="#0A0A0A"/>
+  <rect x="40" y="40" width="1520" height="720" stroke="#1F2937" stroke-width="1"/>
+  <line x1="800" y1="40" x2="800" y2="760" stroke="#1F2937" stroke-width="1"/>
+  <text x="80" y="160" fill="#FFFFFF" font-family="Helvetica Neue, Arial, sans-serif" font-size="96" font-weight="900" letter-spacing="-0.02em">STEVEN<tspan x="80" dy="100">CHOU</tspan></text>
+  <text x="80" y="700" fill="#06B6D4" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="24" letter-spacing="0.2em">ENGINEERING HUB</text>
+  <path d="M880 160H1480" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="880" y="200" fill="#D1D5DB" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.05em">A Digital Twin Architecture</text>
+  <text x="880" y="240" fill="#D1D5DB" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.05em">Proof-Heavy Engineering</text>
+  <text x="880" y="280" fill="#D1D5DB" font-family="Helvetica Neue, Arial, sans-serif" font-size="24" letter-spacing="0.05em">AI-Native Systems Research</text>
+  <circle cx="1480" cy="720" r="16" fill="#06B6D4"/>
+  <rect x="880" y="400" width="600" height="300" stroke="#374151" stroke-width="1" stroke-dasharray="8 8"/>
+  <text x="900" y="440" fill="#9CA3AF" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16">RETRIEVE -> ACT -> WRITE -> LEARN</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg width="960" height="600" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Scorecard visual</title>
+  <desc id="desc">A dark evaluation board scoring agent traces against tool use, verification, artifacts, and Steven fit.</desc>
+  <rect width="960" height="600" rx="42" fill="#0A0A0B"/>
+  <rect x="42" y="42" width="876" height="516" rx="30" fill="#111216" stroke="#2A2D34" stroke-width="2"/>
+  <text x="78" y="104" fill="#F5F5F5" font-family="Inter, ui-sans-serif, system-ui" font-size="42" font-weight="800">Agent Scorecard</text>
+  <text x="80" y="142" fill="#A1A1AA" font-family="Inter, ui-sans-serif, system-ui" font-size="18">Will Steven invest more tokens in this agent?</text>
+
+  <g transform="translate(78 190)">
+    <rect width="250" height="270" rx="22" fill="#17181D" stroke="#30333B"/>
+    <text x="24" y="44" fill="#F4F4F5" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="700">Trace Evidence</text>
+    <g fill="#A1A1AA" font-family="Inter, ui-sans-serif, system-ui" font-size="15">
+      <text x="24" y="86">01 user ask</text>
+      <text x="24" y="122">02 tool calls</text>
+      <text x="24" y="158">03 artifact path</text>
+      <text x="24" y="194">04 verification</text>
+      <text x="24" y="230">05 final report</text>
+    </g>
+    <g stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M202 79l8 8 16-18"/>
+      <path d="M202 115l8 8 16-18"/>
+      <path d="M202 151l8 8 16-18"/>
+      <path d="M202 187l8 8 16-18"/>
+    </g>
+  </g>
+
+  <g transform="translate(378 190)">
+    <rect width="250" height="270" rx="22" fill="#17181D" stroke="#30333B"/>
+    <text x="24" y="44" fill="#F4F4F5" font-family="Inter, ui-sans-serif, system-ui" font-size="20" font-weight="700">Checks</text>
+    <g font-family="Inter, ui-sans-serif, system-ui" font-size="15">
+      <text x="24" y="86" fill="#D4D4D8">Tool discipline</text>
+      <text x="198" y="86" fill="#22C55E" text-anchor="end">10/10</text>
+      <text x="24" y="122" fill="#D4D4D8">Verification</text>
+      <text x="198" y="122" fill="#22C55E" text-anchor="end">15/15</text>
+      <text x="24" y="158" fill="#D4D4D8">Artifact</text>
+      <text x="198" y="158" fill="#22C55E" text-anchor="end">15/15</text>
+      <text x="24" y="194" fill="#D4D4D8">No busywork</text>
+      <text x="198" y="194" fill="#22C55E" text-anchor="end">10/10</text>
+      <text x="24" y="230" fill="#D4D4D8">Steven fit</text>
+      <text x="198" y="230" fill="#22C55E" text-anchor="end">15/15</text>
+    </g>
+  </g>
+
+  <g transform="translate(678 190)">
+    <rect width="204" height="270" rx="22" fill="#052E1B" stroke="#22C55E" stroke-opacity="0.55"/>
+    <text x="102" y="82" fill="#BBF7D0" font-family="Inter, ui-sans-serif, system-ui" font-size="18" font-weight="700" text-anchor="middle">Verdict</text>
+    <text x="102" y="145" fill="#FFFFFF" font-family="Inter, ui-sans-serif, system-ui" font-size="54" font-weight="900" text-anchor="middle">100</text>
+    <text x="102" y="184" fill="#86EFAC" font-family="Inter, ui-sans-serif, system-ui" font-size="21" font-weight="800" text-anchor="middle">Invest more</text>
+    <text x="102" y="225" fill="#BBF7D0" font-family="Inter, ui-sans-serif, system-ui" font-size="13" text-anchor="middle">evidence &gt; vibes</text>
+  </g>
+
+  <path d="M330 325H372" stroke="#52525B" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M630 325H672" stroke="#52525B" stroke-width="2" stroke-dasharray="6 6"/>
+</svg>

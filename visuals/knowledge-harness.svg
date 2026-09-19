@@ -1,0 +1,39 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#080D1A"/>
+  <rect x="64" y="64" width="1472" height="872" rx="40" fill="url(#bg)"/>
+  <rect x="112" y="120" width="1376" height="760" rx="30" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+
+  <rect x="196" y="212" width="360" height="520" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <text x="248" y="282" fill="#A78BFA" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" letter-spacing="0.12em">VAULT</text>
+  <path d="M248 340H500" stroke="rgba(255,255,255,0.62)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M248 402H458" stroke="rgba(255,255,255,0.34)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M248 464H514" stroke="rgba(255,255,255,0.34)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M248 526H438" stroke="rgba(255,255,255,0.34)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M248 588H492" stroke="rgba(255,255,255,0.34)" stroke-width="3" stroke-linecap="round"/>
+
+  <circle cx="800" cy="472" r="154" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.62)" stroke-width="3"/>
+  <circle cx="800" cy="472" r="88" fill="rgba(34,211,238,0.09)" stroke="#22D3EE" stroke-width="3"/>
+  <path d="M744 472H856" stroke="#22D3EE" stroke-width="4" stroke-linecap="round"/>
+  <path d="M800 416V528" stroke="#22D3EE" stroke-width="4" stroke-linecap="round"/>
+  <path d="M556 472H646" stroke="rgba(255,255,255,0.42)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M954 472H1044" stroke="rgba(255,255,255,0.42)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M620 442L646 472L620 502" stroke="rgba(255,255,255,0.42)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1018 442L1044 472L1018 502" stroke="rgba(255,255,255,0.42)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1044" y="212" width="360" height="520" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <text x="1096" y="282" fill="#22D3EE" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" letter-spacing="0.12em">RUNS</text>
+  <rect x="1096" y="332" width="244" height="54" rx="12" fill="rgba(34,211,238,0.10)" stroke="rgba(34,211,238,0.42)"/>
+  <rect x="1096" y="414" width="196" height="54" rx="12" fill="rgba(167,139,250,0.10)" stroke="rgba(167,139,250,0.42)"/>
+  <rect x="1096" y="496" width="268" height="54" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)"/>
+  <rect x="1096" y="578" width="224" height="54" rx="12" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.14)"/>
+
+  <text x="196" y="842" fill="white" font-family="Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="700">KNOWLEDGE HARNESS</text>
+  <text x="196" y="895" fill="rgba(255,255,255,0.68)" font-family="Helvetica Neue, Arial, sans-serif" font-size="34">A quiet runtime layer for querying, testing, and improving a personal knowledge base.</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="82" x2="1516" y2="936" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="0.52" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#18122B"/>
+    </linearGradient>
+  </defs>
+</svg>

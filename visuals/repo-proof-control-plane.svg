@@ -1,0 +1,28 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">Personal website proof chain</title>
+<desc id="desc">A dark technical diagram for Steven Chou's AI agent engineering work.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#020617"/><stop offset="0.5" stop-color="#0f172a"/><stop offset="1" stop-color="#111827"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1" opacity="0.65"/></pattern>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#67e8f9"/></marker>
+</defs>
+<rect width="1200" height="600" rx="28" fill="url(#bg)"/>
+<rect width="1200" height="600" rx="28" fill="url(#grid)" opacity="0.8"/>
+
+<text x="60" y="76" fill="#f8fafc" font-family="Inter, system-ui" font-size="38" font-weight="800">Public Proof Control Plane</text>
+<text x="60" y="112" fill="#94a3b8" font-family="Inter, system-ui" font-size="18">Next.js + MDX site that turns real engineering work into a navigable proof chain.</text>
+<g font-family="Inter, system-ui" font-size="16">
+  <rect x="90" y="190" width="210" height="98" rx="18" fill="#082f49" stroke="#22d3ee"/><text x="116" y="228" fill="#e0f2fe" font-weight="700">Repositories</text><text x="116" y="256" fill="#7dd3fc">source, commits, docs</text>
+  <rect x="370" y="190" width="210" height="98" rx="18" fill="#052e2b" stroke="#34d399"/><text x="396" y="228" fill="#dcfce7" font-weight="700">Writing</text><text x="396" y="256" fill="#86efac">MDX essays + notes</text>
+  <rect x="650" y="190" width="210" height="98" rx="18" fill="#3b1b55" stroke="#a78bfa"/><text x="676" y="228" fill="#f3e8ff" font-weight="700">Proof Pages</text><text x="676" y="256" fill="#c4b5fd">experience, demos, RSS</text>
+  <rect x="930" y="190" width="180" height="98" rx="18" fill="#451a03" stroke="#fbbf24"/><text x="956" y="228" fill="#fef3c7" font-weight="700">Audience</text><text x="956" y="256" fill="#fde68a">clear capability signal</text>
+</g>
+<path d="M300 239 H362" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow)"/><path d="M580 239 H642" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow)"/><path d="M860 239 H922" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="90" y="360" width="1020" height="120" rx="22" fill="#0f172a" stroke="#334155"/>
+<text x="130" y="408" fill="#e2e8f0" font-family="ui-monospace, monospace" font-size="20">repo → artifact → explanation → verification → public narrative</text>
+<text x="130" y="448" fill="#94a3b8" font-family="Inter, system-ui" font-size="17">The website is not a portfolio template. It is the routing layer for proof-driven AI engineering.</text>
+<text x="1166" y="572" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" text-anchor="end">stevenchouai · trace over vibes</text>
+</svg>

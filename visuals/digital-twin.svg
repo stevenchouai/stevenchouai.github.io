@@ -1,0 +1,30 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0B1020"/>
+  <rect x="64" y="64" width="1472" height="872" rx="40" fill="url(#bg)"/>
+  <rect x="112" y="120" width="1376" height="760" rx="30" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  <path d="M220 260H540" stroke="#6EE7F9" stroke-width="2" stroke-linecap="round"/>
+  <path d="M220 312H680" stroke="#6EE7F9" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+  <path d="M220 364H610" stroke="#6EE7F9" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+  <path d="M1000 254C1000 175.68 1063.68 112 1142 112H1222C1300.32 112 1364 175.68 1364 254V334C1364 412.32 1300.32 476 1222 476H1142C1063.68 476 1000 412.32 1000 334V254Z" fill="rgba(110,231,249,0.08)" stroke="rgba(110,231,249,0.5)" stroke-width="2"/>
+  <path d="M1088 248H1276" stroke="#6EE7F9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M1088 302H1276" stroke="#6EE7F9" stroke-opacity="0.6" stroke-width="3" stroke-linecap="round"/>
+  <path d="M1088 356H1202" stroke="#6EE7F9" stroke-opacity="0.6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="820" cy="494" r="144" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+  <circle cx="820" cy="494" r="88" fill="rgba(110,231,249,0.12)" stroke="#6EE7F9" stroke-width="3"/>
+  <path d="M820 406V582" stroke="#6EE7F9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M732 494H908" stroke="#6EE7F9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M718 392L774 448" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M866 540L922 596" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M718 596L774 540" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M866 448L922 392" stroke="rgba(255,255,255,0.38)" stroke-width="2" stroke-linecap="round"/>
+  <rect x="220" y="664" width="1160" height="148" rx="28" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <text x="220" y="908" fill="#6EE7F9" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="28" letter-spacing="0.2em">RETRIEVE · ACT · WRITE BACK · LEARN</text>
+  <text x="220" y="742" fill="white" font-family="Helvetica Neue, Arial, sans-serif" font-size="76" font-weight="700">DIGITAL TWIN</text>
+  <text x="220" y="792" fill="rgba(255,255,255,0.68)" font-family="Helvetica Neue, Arial, sans-serif" font-size="34">A file-first operating layer for knowledge, writing, and site evolution.</text>
+  <defs>
+    <linearGradient id="bg" x1="118" y1="124" x2="1482" y2="936" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#10172B"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+</svg>
