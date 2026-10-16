@@ -1,0 +1,90 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Claude Code Sourcemap architectural deconstruction">
+  <defs>
+    <linearGradient id="cc-bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0C10"/>
+      <stop offset="50%" stop-color="#12151E"/>
+      <stop offset="100%" stop-color="#0C0D12"/>
+    </linearGradient>
+    <radialGradient id="cc-glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#DFC088" stop-opacity="0.16"/>
+      <stop offset="60%" stop-color="#60A5FA" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="36" fill="url(#cc-bg)"/>
+  <rect width="1600" height="1000" rx="36" fill="url(#cc-glow)"/>
+
+  <rect x="56" y="56" width="1488" height="888" rx="24" stroke="#F4F1EA" stroke-opacity="0.08" stroke-width="1.5"/>
+  <line x1="56" y1="140" x2="1544" y2="140" stroke="#F4F1EA" stroke-opacity="0.06"/>
+  <line x1="56" y1="860" x2="1544" y2="860" stroke="#F4F1EA" stroke-opacity="0.06"/>
+
+  <!-- Header -->
+  <circle cx="104" cy="98" r="5" fill="#DFC088"/>
+  <text x="124" y="103" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="16" letter-spacing="0.22em">SYSTEM III · ARCHITECTURAL DECONSTRUCTION</text>
+  <text x="1496" y="103" fill="#F4F1EA" fill-opacity="0.4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="end">1,884 FILES · 8 CHAPTERS · BILINGUAL</text>
+
+  <!-- Central Blueprint Grid -->
+  <g transform="translate(120, 200)">
+    <rect width="1360" height="580" rx="24" fill="#131620" stroke="#DFC088" stroke-opacity="0.22" stroke-width="1.5"/>
+
+    <!-- Fine Blueprint Lines -->
+    <line x1="0" y1="145" x2="1360" y2="145" stroke="#F4F1EA" stroke-opacity="0.05"/>
+    <line x1="0" y1="290" x2="1360" y2="290" stroke="#F4F1EA" stroke-opacity="0.05"/>
+    <line x1="0" y1="435" x2="1360" y2="435" stroke="#F4F1EA" stroke-opacity="0.05"/>
+    <line x1="450" y1="0" x2="450" y2="580" stroke="#F4F1EA" stroke-opacity="0.05"/>
+    <line x1="910" y1="0" x2="910" y2="580" stroke="#F4F1EA" stroke-opacity="0.05"/>
+
+    <!-- Left Column: Metric Highlight -->
+    <g transform="translate(56, 64)">
+      <text x="0" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.2em">SOURCE MAP INDEX</text>
+      <text x="0" y="128" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="104">1,884</text>
+      <text x="0" y="172" fill="#F4F1EA" fill-opacity="0.65" font-family="Inter, -apple-system, sans-serif" font-size="20">Recovered TypeScript Modules</text>
+
+      <rect x="0" y="230" width="336" height="96" rx="16" fill="#191D2A" stroke="#DFC088" stroke-opacity="0.25"/>
+      <text x="24" y="268" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.16em">CURRICULUM</text>
+      <text x="24" y="300" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">8 Interactive Chapters</text>
+
+      <rect x="0" y="350" width="336" height="96" rx="16" fill="#191D2A" stroke="#93C5FD" stroke-opacity="0.25"/>
+      <text x="24" y="388" fill="#93C5FD" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.16em">EDITION</text>
+      <text x="24" y="420" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Bilingual (中文 / EN)</text>
+    </g>
+
+    <!-- Middle & Right Column: 4-Layer Agent Runtime Stack -->
+    <g transform="translate(506, 64)">
+      <text x="0" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.2em">DECONSTRUCTED AGENT ARCHITECTURE</text>
+
+      <g transform="translate(0, 56)">
+        <rect width="796" height="86" rx="16" fill="#191E2B" stroke="#DFC088" stroke-opacity="0.4" stroke-width="1.5"/>
+        <text x="28" y="38" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">LAYER 01 · ORCHESTRATION LOOP</text>
+        <text x="28" y="66" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Query Engine · Streaming Turn State · Subagent Dispatch</text>
+        <circle cx="748" cy="43" r="8" fill="#DFC088"/>
+      </g>
+
+      <g transform="translate(0, 162)">
+        <rect width="796" height="86" rx="16" fill="#191E2B" stroke="#93C5FD" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="28" y="38" fill="#93C5FD" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">LAYER 02 · TOOL &amp; MCP EXECUTION</text>
+        <text x="28" y="66" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Bash Sandbox · File Edit Diffing · MCP Client Protocol</text>
+        <circle cx="748" cy="43" r="8" fill="#93C5FD"/>
+      </g>
+
+      <g transform="translate(0, 268)">
+        <rect width="796" height="86" rx="16" fill="#191E2B" stroke="#34D399" stroke-opacity="0.35" stroke-width="1.5"/>
+        <text x="28" y="38" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">LAYER 03 · CONTEXT &amp; COMPACTION</text>
+        <text x="28" y="66" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Token Budgeting · Auto-Compact Summary · CLAUDE.md Memory</text>
+        <circle cx="748" cy="43" r="8" fill="#34D399"/>
+      </g>
+
+      <g transform="translate(0, 374)">
+        <rect width="796" height="86" rx="16" fill="#191E2B" stroke="#F4F1EA" stroke-opacity="0.2" stroke-width="1.5"/>
+        <text x="28" y="38" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">LAYER 04 · SECURITY &amp; PERMISSION GATES</text>
+        <text x="28" y="66" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Command Prefix Allowlisting · Risk Heuristics · AST Guardrails</text>
+        <circle cx="748" cy="43" r="8" fill="#F4F1EA" fill-opacity="0.6"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom Colophon -->
+  <text x="104" y="908" fill="#F4F1EA" fill-opacity="0.55" font-family="Georgia, New York, serif" font-style="italic" font-size="22">Claude Code Sourcemap — Architectural monograph &amp; interactive deep dive</text>
+  <text x="1496" y="908" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.2em" text-anchor="end">STEVEN CHOU ARCHIVE</text>
+</svg>

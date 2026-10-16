@@ -1,0 +1,81 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agent Scorecard evaluation harness schematic">
+  <defs>
+    <linearGradient id="as-bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0C10"/>
+      <stop offset="55%" stop-color="#11141C"/>
+      <stop offset="100%" stop-color="#0C0E13"/>
+    </linearGradient>
+    <radialGradient id="as-glow" cx="72%" cy="48%" r="45%">
+      <stop offset="0%" stop-color="#DFC088" stop-opacity="0.16"/>
+      <stop offset="60%" stop-color="#34D399" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="36" fill="url(#as-bg)"/>
+  <rect width="1600" height="1000" rx="36" fill="url(#as-glow)"/>
+
+  <rect x="56" y="56" width="1488" height="888" rx="24" stroke="#F4F1EA" stroke-opacity="0.08" stroke-width="1.5"/>
+  <line x1="56" y1="140" x2="1544" y2="140" stroke="#F4F1EA" stroke-opacity="0.06"/>
+  <line x1="56" y1="860" x2="1544" y2="860" stroke="#F4F1EA" stroke-opacity="0.06"/>
+
+  <!-- Header -->
+  <circle cx="104" cy="98" r="5" fill="#DFC088"/>
+  <text x="124" y="103" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="16" letter-spacing="0.22em">SYSTEM II · EVALUATION LAYER</text>
+  <text x="1496" y="103" fill="#F4F1EA" fill-opacity="0.4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="end">JSONL TRACE · DETERMINISTIC SCORE</text>
+
+  <!-- Left Panel: Trace Telemetry Bars -->
+  <g transform="translate(120, 220)">
+    <rect width="820" height="540" rx="24" fill="#141720" stroke="#F4F1EA" stroke-opacity="0.1" stroke-width="1.5"/>
+    <text x="48" y="64" fill="#F4F1EA" fill-opacity="0.5" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.18em">TRACE EVALUATION MATRIX</text>
+    <line x1="48" y1="90" x2="772" y2="90" stroke="#F4F1EA" stroke-opacity="0.07"/>
+
+    <!-- Row 1 -->
+    <g transform="translate(48, 130)">
+      <text x="0" y="24" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="500">01 · Tool Call Discipline</text>
+      <text x="724" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="18" text-anchor="end">20 / 20</text>
+      <rect x="0" y="42" width="724" height="10" rx="5" fill="#1E2330"/>
+      <rect x="0" y="42" width="700" height="10" rx="5" fill="#DFC088"/>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(48, 220)">
+      <text x="0" y="24" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="500">02 · Verification &amp; Build Gate</text>
+      <text x="724" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="18" text-anchor="end">25 / 25</text>
+      <rect x="0" y="42" width="724" height="10" rx="5" fill="#1E2330"/>
+      <rect x="0" y="42" width="724" height="10" rx="5" fill="#34D399"/>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(48, 310)">
+      <text x="0" y="24" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="500">03 · Durable Artifact Output</text>
+      <text x="724" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="18" text-anchor="end">25 / 25</text>
+      <rect x="0" y="42" width="724" height="10" rx="5" fill="#1E2330"/>
+      <rect x="0" y="42" width="688" height="10" rx="5" fill="#DFC088"/>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(48, 400)">
+      <text x="0" y="24" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="500">04 · Zero Theater / Anti-Busywork</text>
+      <text x="724" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="18" text-anchor="end">30 / 30</text>
+      <rect x="0" y="42" width="724" height="10" rx="5" fill="#1E2330"/>
+      <rect x="0" y="42" width="710" height="10" rx="5" fill="#60A5FA"/>
+    </g>
+  </g>
+
+  <!-- Right Panel: Verdict Seal -->
+  <g transform="translate(1000, 220)">
+    <rect width="480" height="540" rx="24" fill="#141720" stroke="#DFC088" stroke-opacity="0.35" stroke-width="1.5"/>
+    <circle cx="240" cy="220" r="118" fill="#DFC088" fill-opacity="0.06" stroke="#DFC088" stroke-opacity="0.35" stroke-width="1.5"/>
+    <circle cx="240" cy="220" r="94" stroke="#DFC088" stroke-opacity="0.2" stroke-dasharray="4 6"/>
+    <text x="240" y="182" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.22em" text-anchor="middle">AUTONOMY VERDICT</text>
+    <text x="240" y="252" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="84" text-anchor="middle">98.4</text>
+    <rect x="130" y="380" width="220" height="46" rx="23" fill="#DFC088" fill-opacity="0.14" stroke="#DFC088" stroke-opacity="0.5"/>
+    <text x="240" y="409" fill="#EDD3A4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="middle">GRANT AUTONOMY</text>
+    <text x="240" y="472" fill="#F4F1EA" fill-opacity="0.48" font-family="Georgia, New York, serif" font-style="italic" font-size="20" text-anchor="middle">Evidence over vibes</text>
+  </g>
+
+  <!-- Bottom Colophon -->
+  <text x="104" y="908" fill="#F4F1EA" fill-opacity="0.55" font-family="Georgia, New York, serif" font-style="italic" font-size="22">Agent Scorecard — Trace-first ROI &amp; autonomy evaluation standard</text>
+  <text x="1496" y="908" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.2em" text-anchor="end">STEVEN CHOU ARCHIVE</text>
+</svg>

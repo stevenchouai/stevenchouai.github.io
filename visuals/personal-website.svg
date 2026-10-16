@@ -1,0 +1,73 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Personal Website narrative and proof-chain architecture">
+  <defs>
+    <linearGradient id="pw-bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0C10"/>
+      <stop offset="50%" stop-color="#12141C"/>
+      <stop offset="100%" stop-color="#0B0D12"/>
+    </linearGradient>
+    <radialGradient id="pw-glow" cx="50%" cy="45%" r="48%">
+      <stop offset="0%" stop-color="#DFC088" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="36" fill="url(#pw-bg)"/>
+  <rect width="1600" height="1000" rx="36" fill="url(#pw-glow)"/>
+
+  <rect x="56" y="56" width="1488" height="888" rx="24" stroke="#F4F1EA" stroke-opacity="0.08" stroke-width="1.5"/>
+  <line x1="56" y1="140" x2="1544" y2="140" stroke="#F4F1EA" stroke-opacity="0.06"/>
+  <line x1="56" y1="860" x2="1544" y2="860" stroke="#F4F1EA" stroke-opacity="0.06"/>
+
+  <circle cx="104" cy="98" r="5" fill="#DFC088"/>
+  <text x="124" y="103" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="16" letter-spacing="0.22em">SYSTEM VII · PUBLIC PROOF MONOGRAPH</text>
+  <text x="1496" y="103" fill="#F4F1EA" fill-opacity="0.4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="end">NEXT.JS 16 · MDX · 160+ VERIFIED ROUTES</text>
+
+  <!-- Editorial Magazine Spread Frame -->
+  <g transform="translate(140, 210)">
+    <rect width="1320" height="560" rx="24" fill="#141720" stroke="#DFC088" stroke-opacity="0.32" stroke-width="1.5"/>
+    <line x1="660" y1="0" x2="660" y2="560" stroke="#F4F1EA" stroke-opacity="0.08"/>
+
+    <!-- Left Page: Typography & Proof -->
+    <g transform="translate(64, 68)">
+      <text x="0" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.2em">ISSUE I · EXHIBITION SURFACE</text>
+      <text x="0" y="96" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="52">Public Proof</text>
+      <text x="0" y="152" fill="#DFC088" font-family="Georgia, New York, serif" font-style="italic" font-size="48">Monograph</text>
+      <rect x="0" y="206" width="460" height="10" rx="5" fill="#F4F1EA" fill-opacity="0.2"/>
+      <rect x="0" y="232" width="380" height="10" rx="5" fill="#F4F1EA" fill-opacity="0.14"/>
+
+      <g transform="translate(0, 296)">
+        <rect width="160" height="108" rx="14" fill="#191D29" stroke="#DFC088" stroke-opacity="0.3"/>
+        <text x="24" y="54" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="36">161</text>
+        <text x="24" y="84" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.14em">STATIC ROUTES</text>
+
+        <rect x="184" y="0" width="160" height="108" rx="14" fill="#191D29" stroke="#60A5FA" stroke-opacity="0.3"/>
+        <text x="208" y="54" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="36">MDX</text>
+        <text x="208" y="84" fill="#93C5FD" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.14em">ESSAY ARCHIVE</text>
+
+        <rect x="368" y="0" width="160" height="108" rx="14" fill="#191D29" stroke="#34D399" stroke-opacity="0.3"/>
+        <text x="392" y="54" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="36">100%</text>
+        <text x="392" y="84" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.14em">LINK VERIFIED</text>
+      </g>
+    </g>
+
+    <!-- Right Page: Decoupled Architecture -->
+    <g transform="translate(724, 68)">
+      <text x="0" y="24" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.2em">CONTENT VS. PRESENTATION</text>
+
+      <rect x="0" y="64" width="532" height="96" rx="16" fill="#191D29" stroke="#DFC088" stroke-opacity="0.3"/>
+      <text x="28" y="104" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.16em">IMMUTABLE FACTS LAYER</text>
+      <text x="28" y="134" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">src/content/* · src/lib/projects.ts</text>
+
+      <rect x="0" y="184" width="532" height="96" rx="16" fill="#191D29" stroke="#60A5FA" stroke-opacity="0.3"/>
+      <text x="28" y="224" fill="#93C5FD" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.16em">EDITORIAL DESIGN SURFACE</text>
+      <text x="28" y="254" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">Haute Couture Typography &amp; Gallery Cards</text>
+
+      <rect x="0" y="304" width="532" height="96" rx="16" fill="#191D29" stroke="#34D399" stroke-opacity="0.3"/>
+      <text x="28" y="344" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.16em">MACHINE &amp; HUMAN READABLE</text>
+      <text x="28" y="374" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="20" font-weight="600">RSS · llms.txt · proof-chain.json</text>
+    </g>
+  </g>
+
+  <text x="104" y="908" fill="#F4F1EA" fill-opacity="0.55" font-family="Georgia, New York, serif" font-style="italic" font-size="22">Personal Website — Public narrative system &amp; verifiable proof archive</text>
+  <text x="1496" y="908" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.2em" text-anchor="end">STEVEN CHOU ARCHIVE</text>
+</svg>

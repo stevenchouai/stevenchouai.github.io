@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#020617"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.6"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#22d3ee"/></marker>
+    <style>
+      text { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; fill: #e5e7eb; }
+      .muted { fill: #94a3b8; font-size: 18px; }
+      .tiny { fill: #94a3b8; font-size: 13px; }
+      .title { fill: #f8fafc; font-size: 42px; font-weight: 800; letter-spacing: -1px; }
+      .section { fill: #f8fafc; font-size: 20px; font-weight: 700; }
+      .label { fill: #f8fafc; font-size: 16px; font-weight: 700; }
+      .box { fill: #0f172a; stroke: #334155; stroke-width: 1.3; rx: 14; }
+      .accent { stroke: #22d3ee; } .violet { stroke: #a78bfa; } .green { stroke: #34d399; } .amber { stroke: #fbbf24; } .rose { stroke: #fb7185; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#bg)"/><rect width="1200" height="520" fill="url(#grid)" opacity="0.75"/>
+  <text x="60" y="72" class="title">Public proof control plane</text><text x="62" y="110" class="muted">The website turns repo work, writing, demos, and resume signals into one navigable proof chain.</text>
+  <rect x="80" y="200" width="230" height="120" class="box accent"/><text x="110" y="242" class="section">Repos</text><text x="110" y="274" class="tiny">code, docs, visuals, releases</text>
+  <rect x="350" y="160" width="230" height="120" class="box violet"/><text x="380" y="202" class="section">Writing</text><text x="380" y="234" class="tiny">technical essays, case studies</text>
+  <rect x="350" y="310" width="230" height="120" class="box green"/><text x="380" y="352" class="section">Demos</text><text x="380" y="384" class="tiny">routes, screenshots, reports</text>
+  <rect x="650" y="235" width="230" height="120" class="box amber"/><text x="680" y="277" class="section">Narrative graph</text><text x="680" y="309" class="tiny">point → line → surface</text>
+  <rect x="930" y="235" width="210" height="120" class="box rose"/><text x="960" y="277" class="section">Opportunity</text><text x="960" y="309" class="tiny">GitHub · resume · interviews</text>
+  <path d="M310 260 C330 230 335 220 342 220" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M310 280 C330 330 335 365 342 370" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M580 220 C620 220 630 250 642 282" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M580 370 C620 370 630 330 642 308" stroke="#22d3ee" stroke-width="2" fill="none" marker-end="url(#arrow)"/><path d="M880 295 H922" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

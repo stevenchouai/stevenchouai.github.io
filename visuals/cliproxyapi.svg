@@ -1,0 +1,105 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CLIProxyAPI gateway routing schematic">
+  <defs>
+    <linearGradient id="cp-bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0C10"/>
+      <stop offset="50%" stop-color="#10141E"/>
+      <stop offset="100%" stop-color="#0B0D12"/>
+    </linearGradient>
+    <radialGradient id="cp-glow" cx="50%" cy="50%" r="46%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#DFC088" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cp-line" x1="260" y1="500" x2="1340" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#DFC088"/>
+      <stop offset="50%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="36" fill="url(#cp-bg)"/>
+  <rect width="1600" height="1000" rx="36" fill="url(#cp-glow)"/>
+
+  <rect x="56" y="56" width="1488" height="888" rx="24" stroke="#F4F1EA" stroke-opacity="0.08" stroke-width="1.5"/>
+  <line x1="56" y1="140" x2="1544" y2="140" stroke="#F4F1EA" stroke-opacity="0.06"/>
+  <line x1="56" y1="860" x2="1544" y2="860" stroke="#F4F1EA" stroke-opacity="0.06"/>
+
+  <!-- Header -->
+  <circle cx="104" cy="98" r="5" fill="#DFC088"/>
+  <text x="124" y="103" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="16" letter-spacing="0.22em">SYSTEM IV · MODEL ACCESS GATEWAY</text>
+  <text x="1496" y="103" fill="#F4F1EA" fill-opacity="0.4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="end">GO · OAUTH · MULTI-ACCOUNT ROUTING</text>
+
+  <!-- Left Client Nodes -->
+  <g transform="translate(120, 250)">
+    <g transform="translate(0, 0)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#DFC088" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">CLIENT 01</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">Claude Code CLI</text>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#60A5FA" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#60A5FA" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">CLIENT 02</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">Codex &amp; Cursor</text>
+    </g>
+    <g transform="translate(0, 360)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#34D399" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">CLIENT 03</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">OpenAI SDKs</text>
+    </g>
+  </g>
+
+  <!-- Routing Curves Left to Center -->
+  <path d="M400 310 C 490 310, 510 450, 580 450" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+  <path d="M400 490 L 580 490" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+  <path d="M400 670 C 490 670, 510 530, 580 530" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+
+  <!-- Center Gateway Core -->
+  <g transform="translate(580, 260)">
+    <rect width="440" height="460" rx="28" fill="#141824" stroke="#DFC088" stroke-opacity="0.45" stroke-width="2"/>
+    <rect x="28" y="28" width="384" height="404" rx="20" fill="#0D1018" stroke="#F4F1EA" stroke-opacity="0.08"/>
+
+    <text x="220" y="84" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.22em" text-anchor="middle">CLIPROXYAPI ENGINE</text>
+    <text x="220" y="132" fill="#F4F1EA" font-family="Georgia, New York, serif" font-size="38" text-anchor="middle">Unified Gateway</text>
+
+    <g transform="translate(56, 174)">
+      <rect width="328" height="64" rx="14" fill="#171C29" stroke="#DFC088" stroke-opacity="0.28"/>
+      <text x="164" y="39" fill="#F4F1EA" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.12em" text-anchor="middle">OAuth Session Multiplexer</text>
+    </g>
+    <g transform="translate(56, 256)">
+      <rect width="328" height="64" rx="14" fill="#171C29" stroke="#60A5FA" stroke-opacity="0.28"/>
+      <text x="164" y="39" fill="#F4F1EA" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.12em" text-anchor="middle">Multi-Account Load Balancer</text>
+    </g>
+    <g transform="translate(56, 338)">
+      <rect width="328" height="64" rx="14" fill="#171C29" stroke="#34D399" stroke-opacity="0.28"/>
+      <text x="164" y="39" fill="#F4F1EA" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.12em" text-anchor="middle">Protocol Translation Layer</text>
+    </g>
+  </g>
+
+  <!-- Routing Curves Center to Right -->
+  <path d="M1020 450 C 1090 450, 1110 310, 1200 310" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+  <path d="M1020 490 L 1200 490" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+  <path d="M1020 530 C 1090 530, 1110 670, 1200 670" stroke="url(#cp-line)" stroke-width="2.5" fill="none"/>
+
+  <!-- Right Provider Nodes -->
+  <g transform="translate(1200, 250)">
+    <g transform="translate(0, 0)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#DFC088" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">UPSTREAM A</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">Anthropic Claude</text>
+    </g>
+    <g transform="translate(0, 180)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#60A5FA" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#60A5FA" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">UPSTREAM B</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">Google Gemini</text>
+    </g>
+    <g transform="translate(0, 360)">
+      <rect width="280" height="120" rx="20" fill="#151924" stroke="#34D399" stroke-opacity="0.35" stroke-width="1.5"/>
+      <text x="32" y="48" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.18em">UPSTREAM C</text>
+      <text x="32" y="84" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="24" font-weight="600">OpenAI / Codex</text>
+    </g>
+  </g>
+
+  <!-- Bottom Colophon -->
+  <text x="104" y="908" fill="#F4F1EA" fill-opacity="0.55" font-family="Georgia, New York, serif" font-style="italic" font-size="22">CLIProxyAPI — High-concurrency OAuth proxy &amp; model routing layer</text>
+  <text x="1496" y="908" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.2em" text-anchor="end">STEVEN CHOU ARCHIVE</text>
+</svg>

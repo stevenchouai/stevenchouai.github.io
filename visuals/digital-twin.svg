@@ -1,0 +1,118 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Digital Twin operating layer schematic">
+  <defs>
+    <linearGradient id="dt-bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0C10"/>
+      <stop offset="50%" stop-color="#11131A"/>
+      <stop offset="100%" stop-color="#0D0E13"/>
+    </linearGradient>
+    <radialGradient id="dt-glow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%" stop-color="#DFC088" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#60A5FA" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dt-gold" x1="200" y1="200" x2="1400" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#EDD3A4"/>
+      <stop offset="50%" stop-color="#C59B52"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" rx="36" fill="url(#dt-bg)"/>
+  <rect width="1600" height="1000" rx="36" fill="url(#dt-glow)"/>
+
+  <!-- Fine Architectural Frame & Grid -->
+  <rect x="56" y="56" width="1488" height="888" rx="24" stroke="#F4F1EA" stroke-opacity="0.08" stroke-width="1.5"/>
+  <line x1="56" y1="140" x2="1544" y2="140" stroke="#F4F1EA" stroke-opacity="0.06" stroke-width="1"/>
+  <line x1="56" y1="860" x2="1544" y2="860" stroke="#F4F1EA" stroke-opacity="0.06" stroke-width="1"/>
+  <line x1="800" y1="140" x2="800" y2="860" stroke="#F4F1EA" stroke-opacity="0.04" stroke-dasharray="6 8"/>
+
+  <!-- Top Metadata Header -->
+  <circle cx="104" cy="98" r="5" fill="#DFC088"/>
+  <text x="124" y="103" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="16" letter-spacing="0.22em">SYSTEM I · OPERATING LAYER</text>
+  <text x="1496" y="103" fill="#F4F1EA" fill-opacity="0.4" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.18em" text-anchor="end">RETRIEVE · EXECUTE · WRITE BACK</text>
+
+  <!-- Left Module: Durable Knowledge Vault -->
+  <g transform="translate(130, 260)">
+    <rect width="340" height="460" rx="22" fill="#151822" stroke="#F4F1EA" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="28" y="28" width="284" height="44" rx="10" fill="#0E1017" stroke="#DFC088" stroke-opacity="0.28"/>
+    <circle cx="52" cy="50" r="4" fill="#DFC088"/>
+    <text x="68" y="55" fill="#F4F1EA" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.16em">OBSIDIAN WIKI VAULT</text>
+
+    <!-- Layered File Nodes -->
+    <g transform="translate(28, 102)">
+      <rect width="284" height="68" rx="12" fill="#1A1E2B" stroke="#F4F1EA" stroke-opacity="0.08"/>
+      <line x1="22" y1="26" x2="140" y2="26" stroke="#DFC088" stroke-width="3" stroke-linecap="round"/>
+      <line x1="22" y1="46" x2="220" y2="46" stroke="#F4F1EA" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="256" cy="34" r="6" fill="#DFC088" fill-opacity="0.4"/>
+    </g>
+    <g transform="translate(28, 188)">
+      <rect width="284" height="68" rx="12" fill="#1A1E2B" stroke="#F4F1EA" stroke-opacity="0.08"/>
+      <line x1="22" y1="26" x2="176" y2="26" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+      <line x1="22" y1="46" x2="204" y2="46" stroke="#F4F1EA" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="256" cy="34" r="6" fill="#93C5FD" fill-opacity="0.4"/>
+    </g>
+    <g transform="translate(28, 274)">
+      <rect width="284" height="68" rx="12" fill="#1A1E2B" stroke="#F4F1EA" stroke-opacity="0.08"/>
+      <line x1="22" y1="26" x2="128" y2="26" stroke="#DFC088" stroke-width="3" stroke-linecap="round"/>
+      <line x1="22" y1="46" x2="236" y2="46" stroke="#F4F1EA" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="256" cy="34" r="6" fill="#DFC088" fill-opacity="0.4"/>
+    </g>
+    <text x="32" y="408" fill="#F4F1EA" fill-opacity="0.45" font-family="SF Mono, Menlo, monospace" font-size="13" letter-spacing="0.14em">FILE-FIRST MEMORY INDEX</text>
+  </g>
+
+  <!-- Center Orbital Astrolabe: Digital Twin Core -->
+  <g transform="translate(800, 490)">
+    <circle r="210" stroke="#F4F1EA" stroke-opacity="0.07" stroke-width="1.5" stroke-dasharray="4 8"/>
+    <circle r="168" stroke="#DFC088" stroke-opacity="0.22" stroke-width="1.5"/>
+    <circle r="124" fill="#141822" stroke="url(#dt-gold)" stroke-width="2"/>
+    <circle r="76" fill="#DFC088" fill-opacity="0.08" stroke="#DFC088" stroke-opacity="0.45" stroke-width="1.5"/>
+
+    <!-- Geometric Star / Compass -->
+    <line x1="-96" y1="0" x2="96" y2="0" stroke="#DFC088" stroke-opacity="0.5" stroke-width="1.5"/>
+    <line x1="0" y1="-96" x2="0" y2="96" stroke="#DFC088" stroke-opacity="0.5" stroke-width="1.5"/>
+    <circle r="22" fill="#DFC088"/>
+    <circle r="8" fill="#0B0C10"/>
+
+    <!-- Orbital Nodes -->
+    <circle cx="0" cy="-168" r="8" fill="#DFC088"/>
+    <circle cx="168" cy="0" r="8" fill="#93C5FD"/>
+    <circle cx="0" cy="168" r="8" fill="#DFC088"/>
+    <circle cx="-168" cy="0" r="8" fill="#93C5FD"/>
+  </g>
+
+  <!-- Connecting Flow Streams -->
+  <path d="M470 430 C 540 430, 560 460, 632 460" stroke="url(#dt-gold)" stroke-width="2.5" fill="none"/>
+  <path d="M632 520 C 560 520, 540 550, 470 550" stroke="#DFC088" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+  <path d="M968 460 C 1040 460, 1060 430, 1130 430" stroke="url(#dt-gold)" stroke-width="2.5" fill="none"/>
+  <path d="M1130 550 C 1060 550, 1040 520, 968 520" stroke="#93C5FD" stroke-opacity="0.45" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+
+  <!-- Right Module: Public Proof & Learned Rules -->
+  <g transform="translate(1130, 260)">
+    <rect width="340" height="460" rx="22" fill="#151822" stroke="#F4F1EA" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="28" y="28" width="284" height="44" rx="10" fill="#0E1017" stroke="#93C5FD" stroke-opacity="0.32"/>
+    <circle cx="52" cy="50" r="4" fill="#93C5FD"/>
+    <text x="68" y="55" fill="#F4F1EA" font-family="SF Mono, Menlo, monospace" font-size="14" letter-spacing="0.16em">COMPOUNDING OUTPUTS</text>
+
+    <g transform="translate(28, 102)">
+      <rect width="284" height="92" rx="14" fill="#1A1E2B" stroke="#DFC088" stroke-opacity="0.24"/>
+      <text x="22" y="34" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.16em">01 · PUBLIC ARTIFACTS</text>
+      <text x="22" y="62" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="600">Site Routes &amp; Essays</text>
+    </g>
+
+    <g transform="translate(28, 212)">
+      <rect width="284" height="92" rx="14" fill="#1A1E2B" stroke="#93C5FD" stroke-opacity="0.24"/>
+      <text x="22" y="34" fill="#93C5FD" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.16em">02 · REUSABLE SKILLS</text>
+      <text x="22" y="62" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="600">Codex &amp; Agent Rules</text>
+    </g>
+
+    <g transform="translate(28, 322)">
+      <rect width="284" height="92" rx="14" fill="#1A1E2B" stroke="#34D399" stroke-opacity="0.24"/>
+      <text x="22" y="34" fill="#34D399" font-family="SF Mono, Menlo, monospace" font-size="12" letter-spacing="0.16em">03 · WRITE-BACK LOOP</text>
+      <text x="22" y="62" fill="#F4F1EA" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="600">Verified Knowledge</text>
+    </g>
+  </g>
+
+  <!-- Bottom Colophon -->
+  <text x="104" y="908" fill="#F4F1EA" fill-opacity="0.55" font-family="Georgia, New York, serif" font-style="italic" font-size="22">Digital Twin — File-first personal intelligence &amp; continuous synthesis</text>
+  <text x="1496" y="908" fill="#DFC088" font-family="SF Mono, Menlo, monospace" font-size="15" letter-spacing="0.2em" text-anchor="end">STEVEN CHOU ARCHIVE</text>
+</svg>
